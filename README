@@ -1,0 +1,2 @@
+git remote add origin git@github.com:marlgl/configurations.git
+git push -u origin master
