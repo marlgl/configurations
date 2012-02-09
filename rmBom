@@ -1,0 +1,17 @@
+#! /bin/sh
+
+#echo "uconv --remove-signature the $1 files"
+
+### uconv not availble
+#    find . -name "*.$1" \
+#    -exec uconv --remove-signature {} -o {}.nobom \; \
+#    -exec mv {}.nobom {} \;
+
+### 
+# Convert DOS newlines (CR/LF) to Unix format using sed command
+#
+echo "Convert DOS newlines (CR/LF) to Unix format using sed command."
+echo "sed 's/^M$//' $1 files ..."
+
+find . -name "*.$1" \
+         -exec bash -c "sed 's/$//' {} > {}.sed;mv {}.sed {}" \;

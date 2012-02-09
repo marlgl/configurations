@@ -1,0 +1,6 @@
+$ gdb m4
+
+# We now tell GDB to use a narrower display width than usual, so that examples fit in
+# this manual.
+(gdb) set width 70
+

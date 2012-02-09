@@ -1,0 +1,56 @@
+# Write your default config options here!
+zoom=yes
+xv=x11
+font="ZhunYuan"
+subcp=utf8
+
+# Sets the autoscale mode.
+# NOTE: 0 means that text scale and OSD scale are font heights in points.
+# 0 no autoscale
+# 1 proportional to movie height
+# 2 proportional to movie width
+# 3 proportional to movie diagonal (default)
+subfont-autoscale=2
+
+# Sets the subtitle text autoscale coefficient as percentage of 
+# the screen size (default 5).
+# default value: 3 (/etc/mplayer/mplayer.conf)
+subfont-text-scale=4
+
+# Sets the autoscale coefficient of the OSD elements (default: 6).
+# @see /etc/mplayer/mplayer.conf
+#subfont-osd-scale=4.8
+
+# Specify the position of subtitles on the screen. The value is
+# the vertical positon of the subtitle in % of the screen height.
+# optional: 89
+subpos=90
+
+# Adjust matching fuzziness when searching for subtitles:
+#  0    exact match
+#  1    Load all subs containing movie name.
+#  2    Load all subs in the current directory.
+sub-fuzziness=1
+
+# Specify which edge of the subtitles should be aligned at the
+# height given by -subpos.
+# 0     Align subtitle top edge (original behavior).
+# 1     Align subtitle center.
+# 2     Align subtitle bottom edge (default).
+subalign=1
+
+# Specify how SPU (DVD/VOBsub) subtitles should be aligned.
+# -1    original position
+# 0     Align at top (original behavior, default)
+# 1     Align at center.
+# 2     Align at bottom.
+#spualign=1
+
+#slang=zh,ch,tw
+
+# expand[=w:h:x:y:o:a:r]
+# <o> OSD/subtitle rendering
+#   0:  disable (default)
+#   1:  enable
+vf=screenshot=2,expand=:::::16/12:2
+

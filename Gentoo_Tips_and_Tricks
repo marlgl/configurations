@@ -1,0 +1,1433 @@
+ALT-SysRq-b 立即重启系统，不卸载分区和同步文件。
+ALT-SysRq-c 调用kexec内核函数来重启，可以生成个crashdump。
+ALT-SysRq-d 显示所有的“锁”，如果开了X的话，估计基本看不到。
+ALT-SysRq-e 给除了init以外的所有进程发送SIGTERM信号，可以试图正常结束所有进程。
+ALT-SysRq-f 调用oom_kill函数来干掉占用了很大内存的进程。
+ALT-SysRq-g 内核调试相关的（好像新内核已经没了？）。
+ALT-SysRq-h 显示其他key的帮助，同样，如果开了X的话，估计基本看不到。
+ALT-SysRq-i 给除了init以外的所有进程发送SIGKILL信号。
+ALT-SysRq-k 结束当前虚拟终端的所有进程。
+ALT-SysRq-l 显示所有活动CPU的栈跟踪信息。
+ALT-SysRq-m 显示内存状态。
+ALT-SysRq-n
+ALT-SysRq-o 可能的话，关机。
+ALT-SysRq-p 显示当前的寄存器状态和标志位。
+ALT-SysRq-r 关闭键盘的raw模式。
+ALT-SysRq-s 同步内存里的数据到硬盘。
+ALT-SysRq-t 显示当前的任务信息。
+ALT-SysRq-u 以只读模式重新挂载所有分区。
+ALT-SysRq-v
+ALT-SysRq-w 显示不可中断的任务
+ALT-SysRq-x
+ALT-SysRq-z
+ALT-SysRq-数字键 调整日志输出级别
+另外，除了物理的按键以外，其实还可以把某个键的值用root权限写到 /proc/sysrq-trigger 文件里（这个文件是个只写不读的怪文件，哈哈），比如
+
+GNOME subprofile contains: USE="eds evo gnome gstreamer"
+
+
+使用vi的配置
+set -o vi
+按 esc+k或esc+j
+
+2. 实现命令自动补齐
+(1)
+set -o emacs
+ls  abc[ESC][ESC]
+(2)
+set -o vi
+ESC,按=号
+
+echo t > /proc/sysrq-trigger
+
+# usermod -a -G uucp mg
+# groupadd notes
+# useradd -c "IBM Domino" -d /home/notes -g notes -m notes
+
+# Hard disk Sentinel report
+# /home/mg/bin/hdsentinel -r ../Downloads/reportOfHardDisk-20091009
+
+## java检测
+$ /opt/sun-jdk-1.6.0.15/bin/jvisualvm
+
+$ export HISTTIMEFORMAT='%F %T'
+$ history | more
+
+* Due to bug #256614, you might loose icons in applications menus.
+ * If you use a login manager, please re-select your session.
+  * If you use startx and have no .xinitrc, just export XSESSION=Gnome.
+   * If you use startx and have .xinitrc, export XDG_MENU_PREFIX=gnome-.
+
+1023990777
+$ lunar --utf8 1985 12 01
+
+export LC_CTYPE="zh_CN.UTF-8"
+/home/mg/opt/netbeans/bin/netbeans
+
+kill $(ps | grep conky | gawk '{print $1}')
+### ps -ef | grep 'oracleorcl1 (LOCAL=NO' | awk '{print $2}'
+### ps -ef | grep 'oracleorcl1 (LOCAL=NO' | awk '{print $2}' | xargs kill -9
+
+### Conky
+dev-perl/DateManip
+
+### --- NTP Pool Time Servers ---------
+
+# ntpdate asia.pool.ntp.org
+# date -s 1259 -- 12:59
+
+### --- NTP Pool Time Servers ---------
+
+Sun VirtualBox
+# emerge -av virtualbox-modules
+# modprobe vboxdrv
+* Please add "vboxdrv", "vboxnetflt" and "vboxnetadp" to:
+ * /etc/modules.autoload.d/kernel-2.6
+
+# windows > net use x: \\vboxsvr\opt
+
+
+
+## /usr/portage/profiles/use.desc
+
+## Games
+#free multiplayer/singleplayer first person shooter
+games-fps/sauerbraten
+games-sports/vdrift
+
+
+
+### -------------------------------------------- Shell Commands ---------------------------------------------------------
+
+   1. vim以root身份保存当前编辑结果 :w !sudo tee % (注：其实用 :w !sudo cat > % 也可以，不过要多敲两个键)
+   2. 用$EDITOR来编辑当前命令 <CTRL-x CTRL-e> (注：以前也知道，用的机会少，记的不劳)
+   3. 更友好的显示当前挂载的文件系统 mount | column -t (注：这个column以前确实不知……)
+   4. watch的-d参数，高亮显示与上次的差异 (注：这个也不知道……)
+   5. 复制之前使用的命令的最后一个参数，<ALT + .> 连续按就逐个显示之前每个命令的最后参数，如果要复制其他参数，先按<ALT ＋ N>，N指定第几个参数，再按<ALT + .>
+   6. 列出最常用的十条命令 history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head (关键是记住awk的技巧)
+
+### ---------------------------------- Find Command ----------------------------------
+1. find pathname -options [-print -exec -ok ...]
+-print： find命令将匹配的文件输出到标准输出。
+-exec： find命令对匹配的文件执行该参数所给出的shell命令。
+    相应命令的形式为'command' {} \;，注意{}和\；之间的空格。
+-ok： 和-exec的作用相同，只不过以一种更为安全的模式来执行该参数所给出的shell命令，
+    在执行每一个命令之前，都会给出提示，让用户来确定是否执行。
+
+find -name "*.rr" -exec ls -l {} \;
+/var/cache/revdep-rebuild
+
+##find -size 0c
+find -size 0c -exec ls -l {} \;
+find -size 0c -ok ls -l {} \;
+
+find -name "*.mxml" -exec cat {} \;| grep -i "setActiveWin"
+$ find -name "*.xml" | xargs grep -i "xxx" # display file name
+
+
+$ find web -type d -name "CVS" -ok rm -Rv {} \;
+$ find . -type d -name ".svn" -ok rm -rv {} \;
+
+删除行首的空格和制表符
+awk '{ sub(/^[ \t]+/,""); print }'
+删除行首和行末的空格
+awk '{ gsub(/^[ \t]+|[ \t]+$/,""); print }'
+
+cat biz_code | awk '{ sub(/^[ \t]+/,""); print }'
+cat biz_code | awk '{ sub(/^[ \t]+|[ \t]+$/,""); print }' > biz_code2
+cat biz_code | awk '{ sub(/^[ \t]+/,"\""); print }' > biz_code3
+cat biz_code3 | awk '{ sub(/^[ \t]+/,"\":\""); print }' > biz_code4
+cat biz_code3 | awk '{ sub(/[ \t]+/,"\":\""); print }' > biz_code4
+cat biz_code4 | awk '{ sub(/$[ \t]+/,"\","); print }' > biz_code5
+cat biz_code4 | awk '{ sub(/$/,"\","); print }' > biz_code5
+cat biz_code5 | awk '{ sub(/[ \t]+/,""); print }' > biz_code6
+
+find -name "*.html" | xargs perl -i -pe s%'charset=gb2312'%'charset=UTF-8'%g
+
+find -name "*.htm" | xargs perl -i -pe s%'/images/news_'%'/resources/images/images/news_'%g
+find -name "*.htm" | xargs perl -i -pe s%'/resources/imgages/resources/images/images/news_'%'/resources/images/images/news_'%g
+
+find -name "*.htm" | xargs perl -i -pe s%'="javascript:goPage('%'="javascript:pay('%g
+
+ps -e | grep httpd | wc
+
+sed -e '/^sshd/!d' hosts.deny | cut -d' ' -f2
+for i in $(sed -e '/^sshd/!d' hosts.deny | cut -d' ' -f2); do echo $i;done
+for i in $(sed -e '/^sshd/!d' hosts.deny | cut -d' ' -f2); do /home/mg/Downloads/hostDeny/pyip.py $i;done
+for i in $(sed -e '/^sshd/!d' hosts.deny.backup | cut -d' ' -f2); do /home/mg/opt/scripts/pyip.py $i;done
+for i in {1..10}; do echo $i;done;
+for i in {1..100}; do echo "insert into T100(ID) values ( $i );" >> t100.sql;done;
+for i in {1..500}; do echo "insert into T500(ID) values ( $i );" >> t500.sql;done;
+
+for i in $(pmap `pidof java` | grep birt | cut -d 'G' -f 2); do mv 'G'$i 'G'$i.rm;done
+$ rename .jar.rm .jar *emf*.jar.rm 
+
+### -----------NetWork Wifi Wireless -------------
+# /etc/init.d/dhcdbd stop
+# /etc/init.d/NetworkManager start
+# emacs -nw /etc/resolv.conf 
+
+/etc/conf.d/net
+dns_domain_lo="marlgl.org"
+/etc/hosts
+/etc/conf.d/hostname
+hostname mobile
+hostname -f
+
+net-wireless/madwifi-ng
+net-wireless/madwifi-ng-tools
+net-wireless/wpa_supplicant
+
+# emerge -av aircrack-ng
+#1 airmon-ng start wlan0
+
+Interface	 Chipset		Driver
+
+wlan0	 Atheros 	ath5k - [phy0]
+				(monitor mode enabled on mon1)
+mon0	Atheros 	ath5k - [phy0]
+
+#2 airodump-ng mon0
+ # airodump-ng --encrypt wpa mon0
+ # airodump-ng --encrypt wep mon0
+
+#3 airodump-ng -c 11 --bssid 00:14:78:B2:40:AE -w cssweb mon0
+#4 aireplay-ng -1 0 -a 00:14:78:B2:40:AE -h 00:23:4e:de:75:9f mon0
+#5 aireplay-ng -2 -F -p 0841 -c ff:ff:ff:ff:ff:ff -b 00:23:CD:9F:EB:8C -h 00:23:4e:de:75:9f mon0
+#6 aircrack-ng adsl*.cap
+#7 airmon-ng stop mon0
+
+net-wireless/wireless-tools
+# wlist wlan0 scan 
+# iwconfig wlan0 essid networkname
+
+###----------------------------
+
+# iptables-restore  /etc/iptables.bak
+
+1. powertop
+2. iptraf
+3. vnstat
+4. iftop
+www.lesswatts.org
+Less Watts
+
+http://gruk.org/server.met.gz
+http://download.oracle.com/otn/linux/oracle11g/linux_x86_11gR1_database.zip
+
+######################### System ---------------------------------------
+# mirrorselect -D -s4
+# pdf Asian Fonts
+media-fonts/acroread-asianfonts
+
+/usr/portage/profiles/use.desc
+/usr/portage/profiles/use.local.desc
+
+$ sudo emerge --sync
+$ sudo emerge -avuDN world
+$ sudo revdep-rebuild # app-portage/gentoolkit 包的一个工具。
+$ sudo emerge -av --depclean # 删除不必要的包，这步要小心点，以免误删了有用的包
+
+ * You must rebuild all drivers if upgrading from xorg-server 1.5
+ * or earlier, because the ABI changed. If you cannot start X because
+ * of module version mismatch errors, this is your problem.
+ * You can generate a list of all installed packages in the x11-drivers
+ * category using this command:
+ * emerge portage-utils; qlist -I -C x11-drivers/
+
+###----------gnome  remove items
+gone-games
+swfdec-gnome
+evolution
+evolution-webcal
+seahorse
+
+gnome-extra/evolution-webcal
+www-client/epiphany
+mail-client/evolution
+gnome-extra/gnome-games
+gnome-extra/fast-user-switch-applet
+gnome-extra/swfdec-gnome
+
+###----------gnome  remove items
+
+应该是 x11-misc/shared-mime-info 从 0.60 升级到 0.70 引起的
+缓存格式不同了
+$ update-mime-database ~/.local/share/mime/
+# update-mime-database /usr/local/share/mime/ - 系统级别的
+
+$ sudo emerge --resume --skipfirst
+
+#File "/usr/bin/xml2po", line 35, in ?
+	    import libxml2
+	    ImportError: No module named libxml2
+# emerge --oneshot dev-libs/libxml2
+emerge javatoolkit or just running python-updater
+forgot to run python-updater 
+forgot to re-emerge gnome-doc-utils 
+
+# scim
+#/etc/scim/global 
+# -/SupportedUnicodeLocales = zh_CN.UTF-8,en_US.UTF-8
+
+
+# env-update && source /etc/profile 
+# update-eix
+# emacs -nw /var/lib/portage/world
+
+###--------------------------------------------- Thinkpad     ACPI  -----------------
+# /etc/init.d/acpid restart
+    # echo 30 > /sys/devices/platform/smapi/BAT0/start_charge_thresh 
+    # echo 70 > /sys/devices/platform/smapi/BAT0/stop_charge_thresh 
+    # cat /sys/devices/platform/smapi/BAT0/*_charge_thresh 
+
+# Fn+F8
+$ synclient TouchpadOff=1
+
+1、首先将ACPI_IBM编译进内核或编译成模块
+CONFIG_THINKPAD_ACPI=y
+安装sys-power/acpid并加入boot runlevel
+$ emerge sys-power/acpid 
+# rc-update add acpid boot
+# /etc/init.d/acpid start
+
+ # cat /sys/devices/platform/thinkpad_acpi/hotkey_recommended_mask 
+0x038c7fff
+
+2、将echo enable,0xffff > /proc/acpi/ibm/hotkey添加入/etc/conf.d/local.start，
+或者直接执行如下命令
+# echo "echo enable,0xffff > /proc/acpi/ibm/hotkey" >> /etc/conf.d/local.start
+很重要,至此已经激活了所有thinkpad的功能键
+5、Fn+F4：hibernate-ram和Fn+F12：hibernate
+# emerge hibernate-script
+# rc-update add hibernate-cleanup boot
+
+# cat /etc/acpi/events/thinkpad-suspend 
+# Thinkpad suspend button (Fn+F4) 
+event=ibm/hotkey HKEY 00000080 00001004
+action=/usr/sbin/hibernate-ram
+
+# cat /etc/acpi/events/thinkpad-hibernate
+# Thinkpad hibernate button (Fn+F12)                                             
+event=ibm/hotkey HKEY 00000080 0000100c
+action=/usr/sbin/hibernate
+
+# cat /etc/acpi/bluetooth.sh 
+#!/bin/bash
+# toggle bluetooth
+grep status /proc/acpi/ibm/bluetooth|grep -q enabled
+if [ $? == 0 ]; then
+  echo disabled > /proc/acpi/ibm/bluetooth
+  /etc/init.d/bluetooth stop --quiet
+else
+  echo enabled > /proc/acpi/ibm/bluetooth
+  modprobe rfcomm
+  /etc/init.d/bluetooth restart --quiet
+fi
+# cat events/thinkpad-bluetooth 
+# Thinkpad bluetooth button
+
+event=ibm/hotkey HKEY 00000080 00001005
+action=/etc/acpi/bluetooth.sh
+
+重新启动acpid
+#7、注意事项
+#i、如果使用gnome，需取消gnome快捷键的设置，否则会出现休眠待机两次的情况，具体处理如下：
+#在你使用的用户下执行gconf-editor，将如下两项的键值设为nothing
+/apps/gnome-power-manager/action_button_hibernate
+/apps/gnome-power-manager/action_button_suspend
+
+###----------------------------------           ACPI  end         --------------------------
+
+# vim /etc/conf.d/hdapsd 
+THRESHOLD="5"
+#layman jokey hdapsd
+/etc/init.d/hdapsd restart
+rc-update add hdapsd default
+
+
+# CD/DVD Creator
+wodim -scanbus
+'wodim --devices' or 'wodim -scanbus'
+First, create a directory and then copy all the files you want to burn into /tmp/iso. Then create the image.iso
+
+mkdir /tmp/iso
+cp *.doc /tmp/iso
+mkisofs -o /tmp/image.iso /tmp/iso
+
+使用 wodim 在命令行下烧录光盘
+# wodim -v dev=/dev/cdrw install-x86-minimal-2008.0.iso
+
+建立一个清单: ebuild unmask-0.1.ebuild digest
+
+# Me
+mg      mobile=NOPASSWD:/usr/bin/emerge,/usr/binebuild,/usr/sbin/emerge-webrsyn$
+%mg     mobile=NOPASSWD:/sbin/shutdown,/sbin/reboot,/sbin/ifconfig
+
+emerge -av adobe-flash
+
+left -234   right- 233
+volumn down - 174
+volumn up - 176
+ThinkVantage - 159
+ Fn - 227
+Win - 115
+Paste - 117
+
+###------------- gentoo下mplayer不装realplayer使用rmvb解码器---------------------
+mplayer -ac help | egrep -i "(aac|amr)" 
+# for 3gp amr opencore-amr
+USE="-gnome" emerge stardict
+然后在声音命令一栏填aplay在 /etc/portage/package.use 添加的是如下内容：
+media-libs/win32codecs real
+media-video/mplayer win32codecs aac real opencore-amr
+
+ 修改 mplayer-1.0_rc2_p26753-r1.ebuild
+< real? ( media-libs/win32codecs
+< media-video/realplayer )
+---
+> real? ( media-libs/win32codecs )
+
+< myconf="${myconf} --realcodecsdir=/opt/RealPlayer/codecs"
+---
+> myconf="${myconf} --realcodecsdir=/usr/lib/win32"
+
+#生成 digest 文件
+ebuild mplayer.ebuild digest
+#重新 emerge mplayer
+mplayer.desktop
+$ sudo vim /usr/share/applications/mplayer.desktop
+Exec=gmplayer %U 修改成
+Exec=gmplayer %f 或者将%U去掉
+####------------------
+
+###-----------------------------------SCIM Setup--------------
+修改 etc\gtk-2.0\gtk.immodules 文件 - 加上 en:ko:ja:th:zh 就可
+   1. "/usr/lib/gtk-2.0/immodules/im-scim.so"  
+   2. "scim" "SCIM Input Method" "scim" "/usr/share/locale" "en:ko:ja:th:zh"
+
+   1. # SCIM  
+   2. LANG='zh_CN' scim -d  
+   3. export XMODIFIERS=@im=SCIM  
+   4. #export XIM_PROGRAM=scim  
+   5. export GTK_IM_MODULE=scim  
+   6. export QT_IM_MODULE=scim  
+
+immqt-bc
+否则每次升级qt，所有基于qt的软件需要全部重新编译
+###-----------------------------------SCIM Setup--------------
+ * 2. Setup ibus:
+ *    $ ibus-setup
+ * 3. Set the following in your user startup scripts
+ *    such as .xinitrc, .xsession or .xprofile:
+ * 
+ *    export XMODIFIERS="@im=ibus"
+ *    export GTK_IM_MODULE="ibus"
+ *    export QT_IM_MODULE="xim"
+ *    ibus-daemon -d -x
+
+
+#### -------------------------------------- Java --------------------------------------
+
+### javac export CLASSPATH=.:$CLASSPATH
+ ### export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
+$ LD_LIBRARY_PATH=`pwd` ; export LD_LIBRARY_PATH
+
+###--------------- JNI ---------------
+## $ g++ -fPIC -O2 -shared -Wl,-soname,libf1iplocator.so.1 -o libf1iplocator.so.1.0 -I/usr/lib/jvm/java-6-sun/include/ -I/usr/lib/jvm/java-6-sun/include/linux com_f1ip_IPLocator.cpp ipsearcher.cpp
+
+$ vi HelloJni.java 
+$ javac HelloJni.java
+# $ javah -classpath . HelloJni
+$ vim HelloJni.cpp
+
+$ g++ -fPIC -O2 -shared -Wl,-soname,libHelloJni.so.1 -o libHelloJni.so.1.0 -I/opt/sun-jdk-1.6.0.17/include/ -I/opt/sun-jdk-1.6.0.17/include/linux HelloJni.cpp
+$ ln -sf libHelloJni.so.1.0 libHelloJni.so.1
+$ ln -sf libHelloJni.so.1 libHelloJni.so
+
+$ vim ToSay.java
+$ javac ToSay.java
+$ java ToSay
+
+
+# java-config --list-available-vms
+java-config --set-system-vm {number}
+java -cp .\; -Djava.ext.dirs=.\lib; javayou.demo.openjms.TopicPublish 
+
+### ---------apache2 ajp tomcat -----------------
+
+emacs -nw /etc/conf.d/apache2 
+append " -D PROXY"
+APACHE2_OPTS="-D DEFAULT_VHOST -D INFO -D LANGUAGE -D SSL -D SSL_DEFAULT_VHOST -D PROXY"
+
+### default settings file
+vim /etc/apache2/modules.d/00_default_settings.conf
+ErrorLog /var/log/apache2/error_log
+
+# test
+## ab -k -n 100 -c 12 -k http://mg.city600.com:8080/coin/userExchangeGameMoney.action
+
+#1
+emacs -nw /etc/apache2/modules.d/00_default_settings.conf 
+# We configure the "default" to be a very restrictive set of features.                          
+#<Directory />                                                                                  
+#       Options FollowSymLinks                                                                  
+#       AllowOverride None                                                                      
+#       Order deny,allow                                                                        
+#       Deny from all                                                                           
+#</Directory>                                                                                   
+# Me                                                                                            
+<Directory />
+           Options Includes Indexes FollowSymLinks MultiViews
+           AllowOverride FileInfo
+           Order allow,deny
+           Allow from all
+</Directory>
+
+#2
+emacs -nw /etc/apache2/vhosts.d/00_default_vhost.conf 
+# Default settings                                                                                                    
+#<VirtualHost *:80>                                                                                                   
+#       ServerName localhost                                                                                          
+#       Include /etc/apache2/vhosts.d/default_vhost.include                                                           
+#                                                                                                                     
+#       <IfModule mpm_peruser_module>                                                                                 
+#               ServerEnvironment apache apache                                                                       
+#       </IfModule>                                                                                                   
+#</VirtualHost> 
+<VirtualHost *:80>
+             Servername localhost
+             DocumentRoot "/home/mg/opt/tomcat/webapps/cityunion"
+             ProxyRequests Off
+             <Proxy *>
+                    Order deny,allow
+                    Allow from all
+             </Proxy>
+
+             ProxyPass /*.jpg !
+             ProxyPass /*.png !
+             ProxyPass /*.gif !
+             ProxyPass /*.htm !
+             ProxyPass /*.html !
+             ProxyPass /*.js !
+             Proxypass /*.exe !
+
+             ProxyPass / ajp://localhost:8009/
+             ProxyPassReverse / ajp://localhost:8009/
+	     # Enable gzip with Apache Tomcat proxy connector
+             AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript image/jpeg image/png image/gif
+</VirtualHost>
+
+
+###-------------- DenyHosts ------------
+#rpm -ivh DenyHosts-2.6-python2.4.noarch.rpm
+# mv denyhosts.cfg-dist denyhosts.cfg
+# ln -s /usr/share/denyhosts/daemon-control-dist /etc/init.d
+# chkconfig daemon-control-dist on
+
+
+
+### ------------------Mozilla firefox------------------------
+1. 最小化释放内存：在地址栏输入 about:config，然后新建“布尔”一个名为 config.trim_on_minimize，并设定值为 true，重新启动 Firefox，这样当 Firefox 最小化时就会释放内存占用。(很有效)
+2. 在about:config中修改browser.sessionhistory.max_total_viewers修改值为5或更小{页面快进/快退功能中保存的页面总数，默认是-1(无限)}
+3. 为 Firefox 分配指定大小的内存缓存：在地址栏输入 about:config，新建一个整数值，名为 browser.cache.memory.capacity，按照如下方案设定其值：
+* 256M 内存=> 4096
+* 512M 内存 => 8192
+* 1G 内存=> 16384
+　　然后重启 Firefox 即可。
+
+echo marlgl | festival --tts
+ *     Or for something more fun:
+ *         "echo "Gentoo can speak" | festival --tts"
+ *     To enable the festival server at boot, run
+ *        rc-update add festival default
+ * Note: festival text to speach (TTS) plugin is not built. To use festival
+ * TTS plugin, please, enable "Use TTS program." at:
+ * "Preferences -> Dictionary -> Sound" and fill in "Commandline" with:
+ * "echo %s | festival --tts"
+
+
+//压缩JS
+java -jar yuicompressor-2.4.2.jar --type js --charset utf-8 -v src.js > packed.js
+//压缩CSS
+java -jar yuicompressor-2.4.2.jar --type css --charset utf-8 -v src.css > packed.css
+
+
+
+### ---------------------------------- -mg- VI -------------------------------
+encoding
+fileencoding
+termencoding
+:set encoding=utf8 或者是其它的编码如：gbk,gb2312等
+
+### ---- 
+# :set encoding, fileencoding, termencoding
+
+1. 
+    # :edit ++enc=cp936
+    # :set termencoding=gbk
+2.
+    $ LANG=zh_CN vim xxx
+#-- :set encoding
+#-- encoding=euc-cn
+
+###-----------------------------------
+:g/^[ \t]\*/d	remove all blank lines
+###------------------------------------
+
+:sp filename.txt
+<CTR>w<CTR>w（control-w两次）
+句子段落移动： "{"  "(" ")"  "}"
+屏幕内移动：H(home) M(middle)  L(lower)
+行号（G）
+
+移动到文本文件中某段落的中间，然后按J（大写）。你会看到J命令让vi将下一行加到当前行末尾。
+
+移到一个字符上并按r，然后输入一个新字符
+u - 撤消
+# 剪切/复制和粘贴
+v - 进入可视化模式
+复制文本，敲y键（代表“yank”，即“用力拉拽”，译者注）。剪切文本，敲d
+P - 将其插入于光标之前
+p - 插入到光标之后
+:r <filename> - insert a file
+
+x   - delete current character
+dw  - delete current word
+dd  - delete current line
+5dd - delete five lines
+
+d$  - delete to end of line
+d0  - delete to beginning of line
+
+:1,.d
+delete to beginning of file
+
+:.,$d
+delete to end of file
+
+#    * ci'、ci"、ci(、ci[、ci{、ci< - 分别更改这些配对标点符号中的文本内容
+#   * di'、di"、di(、di[、di{、di< - 分别删除这些配对标点符号中的文本内容
+#    * yi'、yi"、yi(、yi[、yi{、yi< - 分别复制这些配对标点符号中的文本内容
+
+
+替换掉当前行中第一个匹配的模式，输入:s/<regexp>/<replacement>/
+替换掉当前行中所有匹配的模式，输入:s/<regexp>/<replacement>/g
+替换掉该模式在你的文件中的所有匹配，输入:%s/<regexp>/<replacement>/g
+vi提示每一处变化，输入:%s/<regexp>/<replacement>/gc（代表“confirm”）
+
+# :%s/\s\d\{1,2}\s//gc
+# /<\w\+ [^<]\+>
+:s/foo/bar/g	 Change each 'foo' to 'bar' in the current line.
+:%s/foo/bar/g	 Change each 'foo' to 'bar' in all lines.
+:5,12s/foo/bar/g	 Change each 'foo' to 'bar' for all lines from line 5 to line 12 inclusive.
+:'a,'bs/foo/bar/g	 Change each 'foo' to 'bar' for all lines from mark a to mark b inclusive.
+:.,$s/foo/bar/g	 Change each 'foo' to 'bar' for all lines from the current line (.) to the last line ($) inclusive.
+:.,+2s/foo/bar/g	 Change each 'foo' to 'bar' for the current line (.) and the two next lines (+2).
+:%s/foo/bar/g	 Equivalent to :1,$s/foo/bar/g (change all lines).
+:g/^baz/s/foo/bar/g	 Change each 'foo' to 'bar' in each line starting with 'baz'.
+
+### http://vimregex.com/
+#      Matching
+.	any character except new line 	  	 
+\s	whitespace character 	
+\S	non-whitespace character
+\d	digit 	
+\D	non-digit
+\x	hex digit 	
+\X	non-hex digit
+\o	octal digit 	
+\O	non-octal digit
+\h	head of word character (a,b,c...z,A,B,C...Z and _) 	
+\H	non-head of word character
+\p	printable character 	
+\P	like \p, but excluding digits
+\w	word character 	
+\W	non-word character
+\a	alphabetic character 	
+\A	non-alphabetic character
+\l	lowercase character 	
+\L	non-lowercase character
+\u	uppercase character 	
+\U	non-uppercase character 
+
+A/ Add (or modify) in your .vimrc:
+set ffs=unix,dos
+
+If it says Windows, you can fix that by:
+:set fileformat=unix
+:wq
+:set nobomb
+:wq
+uconv --remove-signature
+
+###
+1. Convert Dos TO Unix Using tr Command
+$ tr -d '\r' < input.file > output.file
+
+2. Perl One Liner
+$ perl -pi -e 's/\r\n/\n/g' input.file
+
+3. Convert DOS newlines (CR/LF) to Unix format using sed command
+If you are using BASH shell type the following command
+    (press Ctrl-V then Ctrl-M to get pattern or special symbol)
+$ sed 's/$//' input.txt > output.txt
+3. Convert UNIX to DOS format using sed command
+$ sed 's/$'"/`echo \\\r`/" input.txt > output.txt
+
+补全方式:
+
+CTRL-P 向上查找以进行补全，
+CTRL-N 向下查找以进行补全
+
+vim中其它的补全方式包括：
+
+整行补全                        CTRL-X CTRL-L
+根据当前文件里关键字补全        CTRL-X CTRL-N
+根据字典补全                    CTRL-X CTRL-K
+根据同义词字典补全              CTRL-X CTRL-T
+根据头文件内关键字补全          CTRL-X CTRL-I
+根据标签补全                    CTRL-X CTRL-]
+补全文件名                      CTRL-X CTRL-F
+补全宏定义                      CTRL-X CTRL-D
+补全vim命令                     CTRL-X CTRL-V
+用户自定义补全方式              CTRL-X CTRL-U
+拼写建议                        CTRL-X CTRL-S 
+
+
+Toggle case "HellO" to "hELLo" with g~ then a movement. 
+Uppercase "HellO" to "HELLO" with gU then a movement. 
+Lowercase "HellO" to "hello" with gu then a movement. 
+
+### ---------------------------------- -mg- VI -------------------------------
+
+### ---------------------------------- Emacs ----------------------------------------
+#缓冲区末尾：Alt+> 
+#缓冲区开始：Alt+<
+#段落：Alt+} Alt+{
+#句子：Alt+e Alt+a
+(setq current-language-environment "UTF-8")
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+
+;;Display Time
+(setq display-time-24hr-format t)
+(setq display-time-day-and-date t)
+(display-time-mode 1);;启用时间显示设置，在minibuffer上面的那个杠上
+;;(setq display-time-use-mail-icon t);;时间栏旁边启用邮件设置
+;;(setq display-time-interval 10)
+
+;============================ 语言环境字符集设置 =================================
+;;这一部份主要用在linux 环境下，windows下没什么作用
+;; (set-language-environment 'Chinese-GB)
+;; (set-keyboard-coding-system 'utf-8)
+;; (set-clipboard-coding-system 'utf-8)
+;; (set-terminal-coding-system 'utf-8)
+;; (set-buffer-file-coding-system 'utf-8)
+;; (set-default-coding-systems 'utf-8)
+;; (set-selection-coding-system 'utf-8)
+;; (modify-coding-system-alist 'process "*" 'utf-8)
+;; (setq default-process-coding-system '(utf-8 . utf-8))
+;; (setq-default pathname-coding-system 'utf-8)
+;; (set-file-name-coding-system 'utf-8)
+;; (setq ansi-color-for-comint-mode t) ;;处理shell-mode乱码,好像没作用
+;=========================== 语言环境字符集设置结束 ===============================
+
+
+ * device-mapper volumes are no longer automatically created for
+ * baselayout-2 users. If you are using baselayout-2, be sure to
+ * run: # rc-update add device-mapper boot
+
+
+C-x  f utf-8  C-x C-s
+
+##tar -cvjf test.tar.bz2 * --exclude com --exclude b780com
+
+Code Listing 4.7: Monitoring network connections
+
+# lsof -i TCP:22
+COMMAND  PID   USER   FD  TYPE  DEVICE SIZE NODE NAME
+sshd    6094   root   3u  IPv4    9145      TCP *:ssh (LISTEN)
+ssh     9962 andrey   3u  IPv4 3489405      TCP larry.cow:35467>larry.bull:ssh (ESTABLISHED)
+
+Here we see the sshd service that listens for ssh connections and an outgoing ssh session.
+
+lsof also comes with some scripts in the /usr/share/lsof/scripts/ directory. Most will be useful in your quest to better spy on your users. 
+
+eclipse -vm /usr/lib/jvm/jdk1.6.0/bin/java -vmargs -Xms128M -Xmx512M -XX:PermSize=64M -XX:MaxPermSize=128M
+
+# eclipse
+/usr/lib/eclipse-3.2/eclipse.ini
+
+-vmargs
+-Xms128m
+-Xmx512m
+-XX:MaxPermSize=128m
+-Dcom.sun.management.jmxremote
+
+/usr/lib/jvm/sun-jdk-1.6/bin/java: symbol lookup error: /home/mg/.eclipse/org.eclipse.platform_3.2.0/configuration/org.eclipse.osgi/bundles/11/1/.cp/libswt-mozilla-gtk-3235.so: undefined symbol: _ZN4nsID5ParseEPKc
+
+export MOZILLA_FIVE_HOME=""
+export MOZILLA_FIVE_HOME=/usr/lib/mozilla
+一、加大JVM的非堆内存
+
+打开 eclipse.ini
+-showsplash
+com.genuitec.myeclipse.product
+–launcher.XXMaxPermSize
+256M
+-vmargs
+-Dosgi.requiredJavaVersion=1.5
+-Xms128m
+-Xmx512m
+-Dosgi.splashLocation=e:MyEclipse 6.0eclipseMyEclipseSplash.bmp
+-Duser.language=en
+-XX:PermSize=128M
+-XX:MaxPermSize=256M
+
+把下面的那个 -XX:MaxPermSize 调大，比如 -XX:MaxPermSize=512M，再把 -XX:PermSize 调成跟 -XX:MaxPermSize一样大
+几乎每次 eclipse 卡到当都是因为这个 非堆内存 不足造成的，把最大跟最小调成一样是因为不让 myeclipse 频繁的换内存区域大小
+
+注意：XX:MaxPermSize 和 Xmx 的大小之和不能超过你的电脑内存大小
+
+在 jdk1.6.0_10 /jre/lib/fonts /  目录下创建一个fallback 目录
+从  windows 中 的 windows／fonts /拷一个中文字体(通常都市simsun.ttc)放入其中
+重新打开 netbeans  ok。
+
+
+Tomcat
+#/sbin/iptables -t nat -A PREROUTING -p tcp -i eth0 -d 127.0.0.1 --dport 80 -j DNAT --to 127.0.0.1:8080
+#/sbin/iptables -A FORWARD -p tcp -i eth0 -d 127.0.0.1 --dport 8080 -j ACCEPT 
+
+#iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+
+iptables -t nat -A OUTPUT -d localhost -p tcp --dport 80 -j REDIRECT --to-ports 8080
+iptables -t nat -A OUTPUT -d mobile -p tcp --dport 80 -j REDIRECT --to-ports 8080
+iptables -t nat -A PREROUTING -d mobile -p tcp --dport 80 -j REDIRECT --to-ports 8080
+
+Runtime Files
+
+#        * /var/tmp/tomcat-x.y Tomcat's temporary directory
+#        * /var/run/tomcat-x.y Tomcat's working directory, where JSPs Java sources and resulting class files live
+#        * /var/log/tomcat-x.y Tomcat's logging directory
+
+linux下解压命令大全
+.tar
+　　解包： tar xvf FileName.tar
+	打包： tar cvf FileName.tar DirName
+　　（注：tar是打包，不是压缩！）
+---------------------------------------------
+.gz
+　　压缩： gzip FileName
+　　.tar.gz 和 .tgz
+	解压：gunzip FileName.gz == gzip -d FileName.gz
+　　压缩：tar zcvf FileName.tar.gz DirName
+　　---------------------------------------------
+.bz2
+　　解压1：bzip2 -d FileName.bz2
+解压2：bunzip2 FileName.bz2
+压缩： bzip2 -z FileName
+.tar.bz2
+　　解压：tar jxvf FileName.tar.bz2
+压缩：tar jcvf FileName.tar.bz2 DirName
+---------------------------------------------
+.bz
+解压1：bzip2 -d FileName.bz
+解压2：bunzip2 FileName.bz
+压缩：未知
+.tar.bz
+解压：tar jxvf FileName.tar.bz
+压缩：未知
+---------------------------------------------
+.Z
+解压：uncompress FileName.Z
+压缩：compress FileName
+.tar.Z
+解压：tar Zxvf FileName.tar.Z
+压缩：tar Zcvf FileName.tar.Z DirName
+---------------------------------------------
+.zip
+　　解压：unzip FileName.zip
+压缩：zip FileName.zip DirName
+---------------------------------------------
+
+
+export WINDOW_MANAGER="/usr/bin/metacity"
+
+### --------------------------------------------------
+###    NetBeans
+To switch to this color theme after installing the plugin, open the options dialog, 
+go to "Fonts and Colors" and choose the "Dark Pastels" color theme.
+
+
+4.   Leaky－Linux下检测内存泄漏的程序。
+
+5.   LeakTracer－Linux、Solaris和HP-UX下跟踪和分析C++程序中的内存泄漏。
+##* dev-util/leaktracer
+ Homepage:            http://www.andreasen.org/LeakTracer/
+ Description:         trace and analyze memory leaks in C++ programs
+9.   Leak Monitor－一个Firefox扩展，能找出跟Firefox相关的泄漏类型。
+12. SAP Memory Analyzer－是一款开源的JAVA内存分析软件，可用于辅助查找JAVA程序的内存泄漏，能容易找到大块内存并验证谁在一直占用它，它是基于 Eclipse RCP(Rich Client Platform)，可以下载RCP的独立版本或者Eclipse的插件。
+
+13. DTrace－即动态跟踪Dynamic Tracing，是一款开源软件，能在Unix类似平台运行，用户能够动态检测操作系统内核和用户进程，以更精确地掌握系统的资源使用状况，提高系统性能，减少支持成本，并进行有效的调节。
+18. Compuware DevPartner Java Edition－包含Java内存检测,代码覆盖率测试,代码性能测试,线程死锁,分布式应用等几大功能模块。
+
+19. Quest JProbe－分析Java的内存泄漏。
+21. BEA JRockit－用来诊断Java内存泄漏并指出根本原因，专门针对Intel平台并得到优化，能在Intel硬件上获得最高的性能。
+25. JavaScript Memory Leak Detector－微软全球产品开发欧洲团队(Global Product Development- Europe team, GPDE) 发布的一款调试工具，用来探测JavaScript代码中的内存泄漏，运行为IE系列的一个插件。
+
+1.以verbose方式运行memcached
+启动memcached时加-v或者-vv选项
+引用
+# /usr/local/bin/memcached -d -m 2048  -u root -l 192.168.1.20 -p 12111 -c 1024 -P /tmp/memcached.pid -vv
+
+-v 将显示错误和警告信息
+-vv 将显示错误警告信息和各客户端的命令和响应
+
+2.telnet方式访问memcached
+引用
+# telnet 192.168.1.20 12111
+
+stats: 服务器将返回每行按照 STAT 开始的状态信息，包括20行，20项左右的信息，包括守护进程的pid、版本、保存的项目数量、内存占用、最大内存限制等等信息。
+
+3.memcached工具memcached-tool
+下载地址：http://code.sixapart.com/svn/memcached/trunk/server/scripts/memcached-tool 
+
+
+############ Ext4----------------
+Creating a new Ext4 filesystem
+
+If you have a partition that you just want to make a new filesystem on, you can simply run:
+##mkfs.ext4 /dev/device
+where device is the name of the block device where you want to put the partition.
+[edit] Converting an ext3 filesystem to ext4
+
+since ext4 is backwards compatible, you can mount an ext3 partition as ext4:
+##mount -t ext4 /dev/device /mnt/mountpoint
+where device is the device you want to mount, and mountpoint is where you want to mount it.
+The filesystem will not, however, use many of the new features of ext4. You can enable those with the following:
+Warning: This will make the filesystem unable to be mounted as ext3
+##tune2fs -O extents,uninit_bg,dir_index /dev/device
+It is important that you then run fsck, to make sure everything is ok:
+##fsck -pf /dev/device
+Note: Using this method, new files will be created using the "extents" method, but old files will not be automatically converted
+################### Ext4 ----End
+
+### ls cannot access Input/output error 
+# mount -t ntfs -o nls=utf8,umask=000 /dev/sdb1 /mnt/L/
+# dosfsck -a /dev/sdb1
+
+
+
+### -----------------------------------------svn- ------------------------------
+###              Subversion 2009-09-24
+# http://en.gentoo-wiki.com/wiki/Subversion/Install
+# Subversion/Install
+Changing repository location:
+# mkdir -p /var/lib/subversion/repository-root
+# ln -s /var/lib/subversion/repository-root /var/svn
+
+Server Install using Emerge
+# emerge --config =dev-util/subversion-1.6.4
+
+* If you intend to run a server, a repository needs to be created using
+ * svnadmin (see man svnadmin) or the following command to create it in
+ * /var/svn:
+ * 
+ *     emerge --config =dev-util/subversion-1.6.4
+
+This will also add the user svn and the group svnusers to your system. 
+# adduser svn
+# groupadd svnusers
+
+Fix the repository permissions
+
+After the repository is created, the permissions need to be fixed.
+# chown -R svn:svnusers /var/svn/repos
+# groupadd svnusers
+
+### http://www.rockfloat.com/howto/gentoo-subversion.html
+
+4. Create a real repository
+root# svnadmin create /var/svn/repos/your-project
+
+# Set permissions!
+root# chown -R apache:svnusers /var/svn/repos/your-project
+root# chmod -R g-w /var/svn/repos/your-project
+root# chmod -R g+rw /var/svn/repos/your-project/db
+root# chmod -R g+rw /var/svn/repos/your-project/locks 
+
+root# vim conf/passwd 
+root# vim conf/svnserve.conf
+remove '#'
+> # anon-access = read
+> # auth-access = write
+> # password-db = passwd
+
+# gpasswd -a userid svnusers
+
+# svn mkdir file:///var/svn/repos/foo -m "Create test directory"
+# svn ls file:///var/svn/repos/
+svn://127.0.0.1/repos/
+
+* Subversion has multiple server types, take your pick:
+ * 
+ *  - svnserve daemon: 
+ *    1. Edit /etc/conf.d/svnserve
+ *    2. Fix the repository permissions (see "Fixing the repository permissions")
+ *    3. Start daemon: /etc/init.d/svnserve start
+ *    4. Make persistent: rc-update add svnserve default
+ * 
+ *  - svnserve via xinetd:
+ *    1. Edit /etc/xinetd.d/svnserve (remove disable line)
+ *    2. Fix the repository permissions (see "Fixing the repository permissions")
+ *    3. Restart xinetd.d: /etc/init.d/xinetd restart
+ * 
+ *  - svn over ssh:
+ *    1. Fix the repository permissions (see "Fixing the repository permissions")
+ *       Additionally run:
+ *         groupadd svnusers
+ *         chown -R root:svnusers /var/svn/repos
+ *    2. Create an svnserve wrapper in /usr/local/bin to set the umask you
+ *       want, for example:
+ *          #!/bin/bash
+ *          . /etc/conf.d/svnserve
+ *          umask 007
+ *          exec /usr/bin/svnserve ${SVNSERVE_OPTS} "$@"
+ * 
+ *  - http-based server:
+ *    1. Edit /etc/conf.d/apache2 to include both "-D DAV" and "-D SVN"
+ *    2. Create an htpasswd file:
+ *       htpasswd2 -m -c /var/svn/conf/svnusers USERNAME
+ *    3. Fix the repository permissions (see "Fixing the repository permissions")
+ *    4. Restart Apache: /etc/init.d/apache2 restart
+ * 
+ *  Fixing the repository permissions:
+ *       chmod -Rf go-rwx /var/svn/conf
+ *       chmod -Rf g-w,o-rwx /var/svn/repos
+ *       chmod -Rf g+rw /var/svn/repos/db
+ *       chmod -Rf g+rw /var/svn/repos/locks
+ * 
+ * If you intend to use svn-hot-backup, you can specify the number of
+ * backups to keep per repository by specifying an environment variable.
+ * If you want to keep e.g. 2 backups, do the following:
+ * echo '# hot-backup: Keep that many repository backups around' > /etc/env.d/80subversion
+ * echo 'SVN_HOTBACKUP_BACKUPS_NUMBER=2' >> /etc/env.d/80subversion
+ * 
+ * Subversion contains support for the use of Memcached
+ * to cache data of FSFS repositories.
+ * You should install "net-misc/memcached", start memcached
+ * and configure your FSFS repositories, if you want to use this feature.
+ * See the documentation for details.
+ * 
+>>> Regenerating /etc/ld.so.cache...
+
+
+# Pragmatic.Guide to Subversion.2010.pdf
+
+ 1. Installing a Command-Line Client
+    Windows:
+        CollabNet
+        http://www.collab.net/downloads/subversion/
+        username: marlgl
+    Mac:
+        Cornerstone
+ 2.
+    Create a base directory for the project.
+    If you are sharing a single repository between multiple projects, create a directory within
+    the repository for your new project.
+    prompt> svn mkdir -m "Make base directory" http://svn.marlgl.org/myproject
+   
+    ### Start server
+    svnserve -d -r /usr/local/var/SVNrepo
+
+    # Creating projects directory
+    svn mkdir -m "Directory for Projects" file://$reporoot/$repo/$projdir
+    $ svn mkdir -m "Directory for Learning" file:///usr/local/var/SVNrepo/Learning
+    $  svn mkdir -m "Make base directory(test)" svn://mobile/test
+    $  svn mkdir -m "Initial setup" svn://mobile/test/trunk
+    $  svn mkdir -m "Initial setup" svn://mobile/test/tags
+    $  svn mkdir -m "Initial setup" svn://mobile/test/branches
+    
+    $ svn list svn://mobile
+
+ 3. Creating a Project from an Existing Source Tree
+   prompt> svn import -m "Initial import" svn://mobile/test/trunk
+
+ 4. Reverting Working Copy Changes
+    $ svn revert *.java -R src/org/marlgl/util
+    $ svn revert -R src/
+    $ svn revert -R .
+ 
+ 5. Ignoring Files
+    $ svn propedit svn:ignore .
+    svn: None of the environment variables SVN_EDITOR, VISUAL or EDITOR are set, 
+        and no 'editor-cmd' run-time configuration option was found
+    
+ 6. Creating a branch
+    $  svn copy -m "Create 1.0 release branch" svn://mobile/test/trunk svn://mobile/test/branches/xm_1.0
+    $  svn checkout svn://mobile/test/branches/xm_1.0 svn-1.0
+ 
+
+
+
+# scp是安全的文件拷贝，基于ssh的登录
+
+scp xxx.tar.tz root@192.168.0.2:/home/x/
+scp -r root@192.168.0.2:/home/* ./
+
+# rc-status ac_adapter 
+RC_COLDPLUG="yes"
+RC_PLUG_SERVICES="net.wlan0 !net.eth0"
+
+#------------------------------- ATI Xorg-X11 -----------------------------
+vim /etc/make.conf
+VIDEO_CARDS="radeon"
+
+emerge -av xorg-x11
+
+emerge -av xf86-video-ati
+
+emerge -av xterm xf86-input-evdev
+/etc/init.d/hald start
+rc-update add hald default
+
+X -configure
+cp xorg.conf.new /etc/X11/xorg.conf
+
+startx
+#----------------------------------- End ------------------------------------
+
+### ------------------------------ GIT ---------------------------------------
+$ ssh-keygen -t rsa -C "email"
+
+   1. Checkout Windows-style, commit Unix-style (core.autocrlf = true)
+   2. Checkout as-is, commit Unix-style (core.autocrlf = input)
+   3. Checkout as-is, commit as-is (core.autocrlf = false)
+
+The first option is the default, which I find rather unfortunate—I don’t consider
+line ending manipulation to be the responsibility of my VCS. Instead, 
+I prefer to keep core.autocrlf set to false 
+and let my text editors deal with line endings. 
+(If you like having core.autocrlf set to true or input, I’d love to hear why.)
+
+$ git config core.whitespace cr-at-eol
+
+Adding the remote repository to our local git repository configuration
+$ git remote add origin ssh://myserver.com/var/git/myapp.git
+$ git diff --cached --ignore-all-space
+
+$ git reset --soft HEAD~
+Before: HEAD    Index   Working
+        v3      v3      v3
+After:  *v2      v3      v3
+
+$ git reset [--mixed] HEAD~
+Before: HEAD    Index   Working
+        v3      v3      v3
+After:  v2      *v2      v3
+
+$ git reset --hard HEAD~
+Before: HEAD    Index   Working
+        v3      v3      v3
+After:  v2      v2      *v2
+
+
+### Amending a Commit(修正提交)
+$ git commit --amend
+### Tip: 如果想要提交信息以及数据，与错误提交一样（或者其它提交），使用 -C flag
+$ git commit --amend -C HEAD
+
+Tagging
+$ git tag
+$ git tag -l 'v1.4.2.*'
+Creating Tags
+Annotated Tags
+$ git tag -a v1.4 -m 'my version 1.4'
+$ git show v1.4
+#Signed Tags
+$ git tag -s v1.5 -m 'my signed 1.5 tag'
+$ gpg --gen-key
+$ git config user.signingkey marlgl.guo@gmail.com
+
+$ git tag -s v1.1.2 -m 'signed 1.1.2 tag'
+
+You need a passphrase to unlock the secret key for
+user: "marlgl (gpg signed) <marlgl.guo@gmail.com>"
+2048-bit RSA key, ID 428CB888, created 2011-09-01
+
+### push remote branch
+$ git push origin mg // git push origin mg:mg
+$ git push origin localBranch:remoteBranch
+
+Total 0 (delta 0), reused 0 (delta 0)
+To git@mobile:CWSocketConnect.git
+ * [new branch]      mg -> mg
+
+$ git branch --set-upstream mg origin/mg
+Branch mg set up to track remote branch mg from origin.
+
+####
+# SparseCheckout
+# .git/info/sparse-checkout (use git-update-index)
+####
+$ git ls-files -v
+H res/keyboardUp.png
+H res/tableCellColLine.png
+H res/xline.png
+$ git update-index --skip-worktree filename
+S filename
+
+### --- Clean
+$ git verify-pack -v .git/objects/pack/pack-095c ... d.idx | sort -k 3 -n | tail -5
+
+5cf6ffc5bb7d83588e3c6c156afca29dcb78fd.idx | sort -k 3 -n | tail -3
+508ecc72d1baa4486de1e868cd2272287860aca7 blob   2140552 2107991 12170084
+ab9810709e0a3e268d2008eac63fb349a1f355d6 blob   2172896 2140338 10029746
+ea0182bf3a05ebfff11199df8d5844ea890ba659 blob   2656256 1712027 15421511
+
+$ git log --pretty=oneline -- flashtrade/webapp/login/upgradePwdActivex/WebDll.msi
+182c25803e6ae4ad945b7d3df7557e442bd0b61b remove some large size files
+a51f1526edf5716bfc946e9b62ade27a0a9fee90 yhzq initial import
+
+$ rm -Rf .git/refs/original/
+$ rm -Rf .git/log$ git gc
+
+;;; ######## 
+$ git remote add origin git@git.cssweb:sso/web_manager.git
+;;; ########
+$ git remote prune --dry-run origin
+
+### ------------------------------------ CVS Git ----------------------------------
+#$ CVSROOT=:pserver:marlgl:guolei@localhost:/root;export CVSROOT
+#$ cvs login
+
+$ CVSROOT=:pserver:guolei@cvs.cssweb.sh.cn:/cvs_2010/product/webtrade cvs login
+Logging in to :pserver:guolei@cvs.cssweb.sh.cn:2401/cvs_2010/product/webtrade
+  542  git cvsimport -v -a -i -k -d :pserver:guolei@cvs.cssweb.sh.cn:/cvs_2010/product/webtrade \
+      -C git/sywg-cvs.git CsTradeSYWG
+  555  mkdir sywg-git
+  556  cd sywg-git/
+  557  git --bare init --shared
+  558  git --bare fetch ../sywg-cvs.git master:master
+  $ git remote add origin git@git.cssweb:trade/zxzq_web_flash.git
+  560  git remote add marlgl git@172.16.2.30:~/trade/flash/CsTradeSywg.git
+  562  git push marlgl master
+
+
+### ------------------------------------ CVS Git ----------------------------------
+
+### Red Hat server sno: 2515dd4e215225dd
+
+###
+# --------------------------------------- Mac Learning Tips -------------------------------
+###
+; marlgl@qq.com
+; G01
+
+$ scutil --set HostName mobile
+
+deactivate the LaunchDaemon script: 
+"sudo launchctl unload -w /Library/LaunchDaemons/com.vmware.launchd.vmware.plist"
+
+set isRunning to do shell script "ps -ef | grep vmnet | grep -v grep | wc -l |sed 's/ //g'"
+if isRunning is "0" then
+    do shell script "/Library/Application\\ Support/VMware\\ Fusion/boot.sh --start" with administrator privileges
+end if
+tell application "VMware Fusion" to activate
+
+### Xcode
+
+# Changing the Company Name
+# __MyCompanyName__.
+# $ defaults write com.apple.Xcode PBXCustomTemplateMacroDefinitions '{"ORGANIZATIONNAME" = "cssweb";}'
+# Quit and restart Xcode.
+
+	control-F: Move forward, to the right (same as the right arrow). 
+	control-B: Move backwards, to the left (same as the left arrow). 
+	control-P: Move to the previous line (same as the up arrow). 
+	control-N: Move to the next line (same as the down arrow).
+    control-A: Move to the beginning of a line (same as the as command-left arrow). 
+	control-E: Move to the end of a line (same as the as command-right arrow). 
+	control-T: Transpose (swap) the characters on either side of the cursor. 
+	control-D: Delete the character to the right of the cursor.
+    control-K: Kill (delete) the rest of the line. This is handy if you want to redo the end of a line of code.
+
+    command + delete: “Delete To Beginning Of Line”. 
+        Just like ctrl+k, but backwards, not forwards. 
+        (It even puts the killed text on the yank-pasteboard — don’t worry if that makes no sense, 
+            it’s an emacs-ism I don’t find useful.)
+    control-L: Center the insertion point in the window.
+		This is great if you’ve lost your text cursor or 
+		want to quickly scroll the window so the insertion point is front and center.
+
+
+### Table 7-1. Xcode Keyboard Shortcuts
+Keystroke    Description
+⌘ ⇧ E   Expand the editor
+⌘ [     Shift the code block to the left
+⌘ ]     Shift the code block to the right
+Tab     Accept a completion
+Esc     Show the completion menu
+Control-. (period)          Cycle through the completions
+Shift-control-. (period)    Cycle backward through the completions
+Control-/   Move to the next completion placeholder
+Command-control-S   Make a snapshot
+Control-T   Transpose the characters adjacent to the cursor
+Control-L   Center the cursor in the text editor
+⌘ ⌥ D   Show the Open Quickly window
+⌘ ⌥ ↑   Open the counterpart file
+⌘ D     Add a bookmark
+
+Command-Shift-O Quickly open file
+
+# Option–double-click  Search in documentation
+⌘ Y Run the program with the debugger
+⌘ ⌥ P   Continue (in the debugger)
+⌘ ⌥ O   Step over
+⌘ ⌥ I   Step into
+⌘ ⌥ T   Step out
+
+
+# 10 iPhone Memory Management Tips:
+
+Respond to Memory Warnings
+Avoid Using Autoreleased Objects
+Use Lazy Loading and Reuse
+Avoid UIImage’s imageNamed:
+Build Custom Table Cells and Reuse Them Properly
+Override Setters Properly
+Beware of Delegation
+Use Instruments
+Use a Static Analysis Tool
+Use NSZombieEnabled
+
+### "EXC_BAD_ACCESS signal"
+1. Product -> Edit Scheme... 
+    -> Run... -> EnvironmentVariables.
+    Of course, the other way is :
+        click Product -> Run... 
+        when holding on alt and option keys.
+
+2. NSZombieEnabled YES
+3. MallocStackLogging YES
+
+### look alloc history
+gdb> shell malloc_history <ProcessID> <OBJECT ADDRESS>
+
+
+
+### Clang LLVM
+mg@mobile ~/Library/Clang $ sudo ./set-xcode-analyzer --use-checker-build=~/Library/Clang
+Password:
+(+) Using Clang bundled with checker build: /Users/mg/Library/Clang
+(+) processing: /Developer/Library/Xcode/Plug-ins/Clang LLVM 1.0.xcplugin/Contents/Resources/Clang LLVM 1.0.xcspec
+
+# Resetting Xcode to its default behavior:
+$ sudo set-xcode-analyzer --use-xcode-clang
+
+
+
+###
+# ------------------------ MyEclipse 9 ----------------------------------------------------------------
+###
+$ vim /Applications/MyEclipse/MyEclipse 9.app/Contents/Profile/myeclipse.app/Contents/MacOS/myeclipse.ini
+
+###
+### Microsoft XP
+###
+MRX3F-47B9T-2487J-KWKMF-RPWBY{工行版}
+Windows XP VLK 序列号 
+TQMCY-42MBK-3R4YG-478KD-7FY3M {这个测试过可以使用，下面几个没有测试}
+Windows XP VOL 序列号 
+T72KM-6GWBP-GX7TD-CXFT2-7WT2B（上海政府0686版） 
+QHYXK-JCJRX-XXY8Y-2KX2X-CCXGD(广州政府版) 
+DG8FV-B9TKY-FRT9J-6CRCC-XPQ4G(上海政府版） 
+MFBF7-2CK8B-93MDB-8MR7T-4QRCQ（北京政府版） 
+MRX3F-47B9T-2487J-KWKMF-RPWBY(工行版) 
+DP7CM-PD6MC-6BKXT-M8JJ6-RPXGJ （我用了这个，可以通过的） 
+HH7VV-6P3G9-82TWK-QKJJ3-MXR96 
+HCQ9D-TVCWX-X9QRG-J4B2Y-GR2TT
+
+
+### Start server
+svnserve -d -r /usr/local/var/SVNrepo
+$ svn import Learning file:///usr/local/var/SVNrepo/Learning/trunk -m "base 1.0"
+$ svn import Learning svn://mobile/Learning/branches -m "branche 1.0"
+
+
+### ---------- create User and group ---------------------------------------
+macbook:~ gorby$ dscl . -list /groups gid | grep 4200
+macbook:~ gorby$ dscl . -list /users uid | grep 4200
+udo dscl . -create /groups/dba
+sudo dscl . -append /groups/dba gid 4200
+sudo dscl . -append /groups/dba passwd "*"
+sudo dscl . -create /users/oracle
+sudo dscl . -append /users/oracle uid 4200
+sudo dscl . -append /users/oracle gid 4200
+sudo dscl . -append /users/oracle shell /bin/bash
+sudo dscl . -append /users/oracle home /Users/oracle
+sudo dscl . -append /users/oracle realname "Oracle software owner"
+sudo dscl . -append /Groups/dba GroupMembership oracle
+sudo mkdir /Users/oracle
+sudo chown oracle:dba /Users/oracle
+sudo defaults write /Library/Preferences/com.apple.loginwindow HiddenUsersList -array-add oracle
+sudo passwd oracle
+
+dscl . -create /groups/oinstall
+dscl . -append /groups/oinstall gid 600
+dscl . -append /groups/oinstall passwd "*"
+dscl . -create /users/oracle
+dscl . -append /users/oracle uid 600
+dscl . -append /users/oracle gid 600
+dscl . -append /users/oracle shell /bin/bash
+dscl . -append /users/oracle home /Users/oracle
+dscl . -append /users/oracle realname "Oracle software owner"
+mkdir /Users/oracle
+chown oracle:oinstall /Users/oracle
+
+### -----------------------------------------------------------------
+
+### --------------------- Xcode -------------------------------------
+# DarkCity.xccolortheme Panic Sans
+$ cp /Developer-old/Library/PrivateFrameworks/XcodeEdit.framework/Resources/DarkCity.xccolortheme .
+$ gcc -framework Foundation prog1.m -o prog1
+
+在GDB窗口中使用po就可以查看变量.(po = print object) 
+1）查看String 或其它变量。
+po 变量名
+2）查看某个Property。比如要查看item变量的name属性。
+po [item name]    注意，po item.name是不工作的。
+3）查看数组
+po [myArray objectAtIndex:index]
+
+### --------------------- Xcode -------------------------------------
+
+### --------------------- Mac Port ------------------------------------
+3. Mac Port中第三方软件下载包存放的默认路径是：/opt/local/var/macports/distfiles/ 
+为了提高安装速度，可以在安装新port时直接将此目录下的文件拷贝到新的Mac Port相同的目录中就可以避免Port去网上下载。 
+
+4. 使用Mac Port前应该首先更新Port的index 
+$ sudo port selfupdate 
+-
+5. 搜索到需要安装的软件包之后，如何查看具体的软件包的内容和说明？
+$ port info maven2 
+6. 查看即将安装的或者已经安装的软件包的依赖关系
+$ port deps maven2 
+7. 查看安装时允许客户定制的参数 
+$ port variants maven2
+9. 安装完毕之后，清除安装时产生的临时文件 
+$ sudo port clean --all maven2 
+10. 卸载已经用Mac Port安装的软件 
+sudo port uninstall maven2
+11. 查看已经安装的软件包 
+$ port installed
+12. 查看所有可用的软件包
+$ port list
+
+### --------------------- Mac Port -------------------------------------
+
+###
+# --------------------------------------- Mac Learning Tips -------------------------------
+###
+

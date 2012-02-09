@@ -1,0 +1,268 @@
+set nocompatible
+"source $VIMRUNTIME/vimrc_example.vim
+syntax on " syntax highlighting
+
+set encoding=utf-8 fileencodings=utf-8,cp936
+
+:nmap <C-t> :tabnew<CR>	" Ctrl+t new tab
+:nmap <F5> :tabprevious<CR>
+:nmap <F6> :tabnext<CR>
+
+" ----------------------------------------------------
+"  => General
+" ----------------------------------------------------
+" Sets how many lines of history VIM has to remember
+set history=1000
+
+set modelines=0
+set scrolloff=3
+set showmode
+set showcmd
+set hidden
+set wildmenu
+set wildmode=list:longest
+set visualbell
+" set cursorline " display under line at current cursor
+set ttyfast
+
+set ruler "Always show current position
+
+
+set backspace=indent,eol,start
+
+"set undofile
+"set undoreload=10000
+"set cpoptions+=J
+
+" display '$' at end of echo line
+set list
+set listchars=tab:▸\ ,eol:¬
+
+set shell=/bin/bash
+set lazyredraw
+set wildignore+=*.pyc,.hg,.git
+set matchtime=3
+set showbreak=↪
+
+"-------------------------------
+" => Files, backups and undo
+"-------------------------------
+" Turn backup off
+set nobackup
+set nowb
+set noswapfile
+
+" Set the boolean number option to true
+"set number
+
+" Save when losing focus
+au FocusLost * :wa
+
+" Set the textwidth option to '120'
+set textwidth=90
+set formatoptions=qrn1
+"set colorcolumn=+1
+
+"---------------------------------
+" => Text, tab and indent related
+"---------------------------------
+
+set expandtab
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+set smarttab
+
+set lbr
+set tw=500
+
+set ai "Auto indent
+set si "Smart indent
+set wrap "Wrap lines
+
+"------------------------------
+" => Statusline
+"------------------------------
+" Always hide the statusline
+set laststatus=2
+
+" Format the statusline
+" :help statusline
+"set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
+set statusline=\ %{HasPaste()}%t%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c\ %V
+
+function! CurDir()
+    let curdir = substitute(getcwd(), '/Users/mg/', "~/", "g")
+    return curdir
+endfunction
+
+function! HasPaste()
+    if &paste
+        return 'PASTE MODE  '
+    else
+        return ''
+    endif
+endfunction
+
+colorscheme torte      
+
+set cindent
+set foldmethod=syntax   
+
+
+set filetype=sql
+set showmatch
+
+
+" SQL
+iab mg_putline DBMS_OUTPUT.PUT_LINE(
+iab mg_msg DBMS_OUTPUT.PUT_LINE(
+iab to_char TO_CHAR
+iab dbms_utility DBMS_UTILITY
+iab no_data_found NO_DATA_FOUND
+iab notfound NOTFOUND
+iab remn ------------------------------------------------------------------
+iab remm ------******************************************************------
+
+"-----------------------
+" => set window size
+"-----------------------
+" window position x: 185 y: 120
+"winpos 185 120
+"set lines=34 columns=120
+
+"-----------------------
+" => set GUI font
+"----------------------
+set guifont=Monaco:h16
+
+"----------------------------------------------------
+" => Steve Losh's .vimrc 
+"  Author: Steve Losh <steve@stevelosh.com>
+"  Source: http://bitbucket.org/sjl/dotfiles/src/tip/vim/
+"----------------------------------------------------
+
+" Searching and movement ------------------------------------------------------ {{{
+
+" Use sane regexes.
+
+nnoremap / /\v
+vnoremap / /\v
+
+set ignorecase
+set smartcase
+
+set incsearch
+set showmatch
+set hlsearch
+
+set gdefault
+
+set virtualedit+=block
+
+map <leader><space> :noh<cr>
+
+runtime macros/matchit.vim
+map <tab> %
+
+" Quicker Escaping
+"  Ctrl+C or Ctrl+[, ESC
+inoremap jk <ESC>
+inoremap jj <ESC>
+
+nnoremap Y y$
+nnoremap D d$
+
+" Keep search matches in the middle of the window.
+nnoremap * *zzzv
+nnoremap # #zzzv
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" L is easier to type, and I never use the default behavior.
+noremap L $
+
+" Heresy
+"inoremap <c-a> <esc>I
+"inoremap <c-e> <esc>A
+
+" Open a Quickfix window for the last search
+nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
+
+" Error navigation {{{
+"
+"             Location List     QuickFix Window
+"            (e.g. Syntastic)     (e.g. Ack)
+"            ----------------------------------
+" Next      |     M-k               M-Down     |
+" Previous  |     M-l                M-Up      |
+"            ----------------------------------
+"
+nnoremap ˚ :lnext<cr>zvzz
+nnoremap ¬ :lprevious<cr>zvzz
+inoremap ˚ <esc>:lnext<cr>zvzz
+inoremap ¬ <esc>:lprevious<cr>zvzz
+nnoremap <m-Down> :cnext<cr>zvzz
+nnoremap <m-Up> :cprevious<cr>zvzz
+" }}}
+
+" disable the arrow keys
+nnoremap    <up>    <nop>
+nnoremap    <down>  <nop>
+nnoremap    <left>  <nop>
+nnoremap    <right> <nop>
+inoremap    <up>    <nop>
+inoremap    <down>  <nop>
+inoremap    <left>  <nop>
+inoremap    <right> <nop>
+
+nnoremap    j   gj
+nnoremap    k   gk
+
+" Easy buffer navigation
+" Note: For this section to make any sense you need to remap Ctrl-; to Ctrl-g at
+"       the KEYBOARD level.  The reason is that for some reason the OS X doesn't
+"       recognize the Ctrl+; combination as something special, so it just passes it
+"       to Vim as a semicolon.
+"
+"       Yeah, it's dumb.
+noremap     <C-j>   <C-w>h
+noremap     <C-k>   <C-w>j
+noremap     <C-l>   <C-w>k
+noremap     <C-g>   <C-w>l
+noremap     <leader>g   <C-w>v<C-w>l
+
+inoremap    <C-h>   <left>
+inoremap    <C-j>   <C-o>gj
+inoremap    <C-k>   <C-o>gk
+inoremap    <C-l>   <right>
+
+" Ctrl-x, Ctrl-d, Ctrl-D 
+inoremap    <C-x>   <C-o>x
+inoremap    <C-d>   <C-o>dw
+
+" M-h quick in system
+"inoremap    <M-h>   <C-o>b
+"inoremap    <M-l>   <C-o>w
+
+inoremap    <C-a>   <Home>
+inoremap    <C-e>   <End>
+
+" Backups {{{
+"set undodir=~/.vim/tmp/undo//     " undo files
+"set backupdir=~/.vim/tmp/backup// " backups
+"set directory=~/.vim/tmp/swap//   " swap files
+"set backup                        " enable backups
+" }}}
+
+
+" Only do this part when compiled with support for autocommands
+if has("autocmd")
+    " In text files, always limit the width of text to 90 characters
+    autocmd BufRead *.txt set tw=90
+    " When editing a file, always jump to the last cursor position
+    autocmd BufReadPost *
+        \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+        \   exe "normal g'\"" |
+        \ endif
+endif
