@@ -1,0 +1,14 @@
+et encoding=cp936
+set fileencodings=ucs-bom,utf-8,cp936
+
+inoremap    <C-h>   <left>
+inoremap    <C-j>   <C-o>gj
+inoremap    <C-k>   <C-o>gk
+inoremap    <C-l>   <right>
+
+" Ctrl-x, Ctrl-d, Ctrl-D 
+inoremap    <C-x>   <C-o>x
+inoremap    <C-d>   <C-o>dw
+
+inoremap    <C-a>   <Home>
+inoremap    <C-e>   <End>
