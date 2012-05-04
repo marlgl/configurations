@@ -1,0 +1,44 @@
+#! /bin/sh
+
+# Call this script with at least 1 parameter, for example
+# ./git_pull_batch *_*
+MINPARAMS=1
+MAXDEPTH=1      # max directory levels
+
+if [ $# -lt "$MINPARAMS" ]
+then
+    echo
+    echo "This script needs at least $MINPARAMS command-line arguments!"
+fi
+
+if [ -n "$1" ]      # Tested variable is quoted.
+then
+    echo "---------------------------------------------------"
+    echo "Parameter #1 is $1"   # Need quotes to escape #
+
+    if [ -n "$2" ]
+    then
+        MAXDEPTH=$2
+    fi
+    
+    echo "find . -type d -maxdepth $MAXDEPTH -name \"$1\" ..."
+    echo "---------------------------------------------------"
+    echo
+fi
+
+
+### 
+# batch git-pull: 
+#   while (hasdir)
+#       cd {};
+#       git pull;
+#       cd ..
+#
+# \033[01;34m - blue
+# \033[01;31m - red
+# \033[00m    - green
+#find . -type d -maxdepth $MAXDEPTH -name "$1"
+find . -type d -maxdepth $MAXDEPTH -name "$1" \
+         -exec bash -c "echo -e \"Merge origin repository \\033[01;34m --> \" \
+           \"\\033[01;31m\" {}\" \\033[00m \" ;cd {} ;git pull;cd .." \;
+
