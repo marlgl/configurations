@@ -1,0 +1,1483 @@
+#================================ Install =========================
+groupadd dba
+groupadd oinstall
+useradd -c "Oracle Software Owner" -g oinstall -G dba -d /home/oracle -m oracle
+passwd oracle
+# install
+./runInstaller -ignoreSysPrereqs or edit/create the file /etc/redhat-release.
+#==============================================================
+
+### --------------------------- Windows ---------------------------------------------
+#
+## MS
+# > net start oracleserviceorcl # 'orcl' - oracle sid
+# > net start oracleServiceMG
+# -- net start visualsvnserver
+# "if oracle service is off, ora-12560 error occurs"
+#
+# $ sqlplus /nolog
+#
+# SQL> conn / as sysdba
+#   or
+# $ sqlplus / as sysdba
+#
+# 3、shutdown immediate
+#
+#
+#
+#
+#; SQL> ALTER USER username ACCOUNT LOCK;
+#; SQL> ALTER USER username ACCOUNT UNLOCK;
+sys@MG10g> alter system set sga_target=200m scope=spfile;
+     
+#; create tablespace hpx datafile 'e:/oracle/product/10.1.0/oradata/orcl/hpx.dbf' size 100m autoextend on next 50m maxsize unlimited;
+
+#; create user hpx identified by hpx default tablespace hpx temporary tablespace temp;
+#; grant connect,resource to hpx; 
+
+#;; create tablespace webtrade 
+#    datafile 'D:\oracle\product\10.2.0\oradata\mg/webtrade01.dbf' 
+#    size 100m autoextend on next 50m 
+#    maxsize unlimited;
+#;; create user citicstrade identified by guolei default tablespace webtrade;;; grant connect,resource to citicstrade;
+
+#SQL> grant create session to citicstrade;
+#SQL> grant create view to citicstrade;
+#SQL> grant create view to citicstrade;
+#sys@MG10g> grant debug any procedure, debug connect session to citicstrade;
+#
+#; set define off
+#sys@MG10g> grant create any view to citicstrade;
+#sys@MG10g> grant create any materialized view to citicstrade;
+#sys@MG10g> grant drop any materialized view to citicstrade;
+#sys@MG10g> grant alter any materialized view to citicstrade;
+#
+#; PURGE recyclebin;
+#
+# sys@MG10g> create public database link db200 connect to citicstrade identified by citicswelcome8 using '200';
+#
+# citicstrade@MG10g> select to_char(handletime, 'yyyy-mm-dd hh24:mi:ss am') from monitor_hosts@db200;
+#
+#
+#
+#
+# SQL> alter table cssweb_dictionary modify(key_code varchar2(50));
+#
+# SQL> alter system set processes=150 scope=spfile;
+# -- 关闭数据库
+# SQL> shutdowm immediate;
+# SQL> startup
+# ---------------
+# SQL> show parameters processes;
+#
+# Create Synonyms
+# SQL> CREATE PUBLIC SYNONYM Plan_table for Plan_table;
+#
+# SQL> desc dba_synonyms;
+;
+; sys@MG10g> alter session set nls_language='AMERICAN';
+;
+; NLS_LANG = SIMPLIFIED CHINESE_CHINA.ZHS16GBK
+; AMERICAN_AMERICA.ZHS16GBK
+;
+; show "rows will be truncated" informations
+; "set wrap on;" fix that.
+;
+#
+#
+###### ------------------------------------ Microsoft Windows -----------------------------------------------
+
+
+#### -------------------sqlplus
+Oracle Software
+oracle@mobile $ emctl start dbconsole
+
+# $ sqlplus "/as sysdba"
+# $ sqlplus / as sysdba;
+# -- startup
+ Oracle has three shutdown modes:
+·       Normal (default) - waits for in-flight work to complete
+·       Immediate - terminates all sessions and does a rollback on all uncommitted transactions
+·       Abort - aborts all sessions, leaving current DML in need of rollback, de-allocates the SGA and terminates the background processes.
+
+# Managing Listeners with lsnrctl
+### To start the dbconsole process:
+    Navigate into your $ORACLE_HOME/bin directory
+#1.   Run the following statement:
+#2.    ./emctl start dbconsole
+#     ./emctl stop dbconsole
+
+#MDSYS
+$ imp oragis/oragis file=/home/mg/Mine/Documents/Database/Oracle/Spatial/files/counties.dmp full=y
+
+#~/product/10.2.0.1/network/admin $ emacs -nw tnsnames.ora
+OMS =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.0.174)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = orcl)
+    )
+)
+# alter user scott account unlock;
+# ALTER USER outln ACCOUNT unlock;
+# sql>ALTER USER outln IDENTIFIED BY outln;
+
+## To Start iSQL*Plus Application Server
+isqlplusctl start/stop
+http://machine_name:5560/isqlplus/
+
+## Current time stamp
+select current_timestamp from dual;
+
+## Select Table name
+# select * from user_objects where object_type = 'TABLE'; 
+# select * from tabs;
+# select table_name from tabs;
+
+## Oracle Page:
+select * from (select rownum as rn, table_name from tabs where rownum <=MaxNum)
+where rn >= MinNum;
+
+select * from (select a.table_name, rownum rn from (select * from tabs) a) where rn between 700 and 703;
+select b.* from (select a.table_name, rownum rn from (select * from tabs) a) b where rn between 700 and 703;
+
+#dbs/init.ora
+ select to_char(sysdate, 'YYYY-MM-DD HH24:mi:ss') from dual
+ Automatically start and stop the DB-Console
+
+   Navigate into your $ORACLE_HOME/bin directory
+   Run the following statement:
+    $ emctl start dbconsole
+    $ emctl stop dbconsole
+    $ emctl status dbconsole 
+	
+# http://mobile.marlgl.org:1158/em/console/aboutApplication
+
+#Get Userlist:
+	select * from all_users;
+# Get User & Passwords Hashes:
+	select username, password, account_status from dba_users;
+
+#Change Oracle Passwords:
+# With SQL*Plus Password cmd:
+	alter user system identified by rds2007;   
+	-- Password send in cleartext over the network  
+# With Alter user cmd:
+	# alter user system identified by values '737B466C2DF536B9’;   
+	# -- Set a password hash directly 
+
+##1.create a user: database authentication
+
+# sql> create user juncky identified by oracle default tablespace users
+# sql> temporary tablespace temp quota 10m on data password expire
+# sql> [account lock|unlock] [profile profilename|default];
+
+##2.change user quota on tablespace
+sql> alter user juncky quota 0 on users;
+
+##3.drop a user
+sql> drop user juncky [cascade];
+
+##4. monitor user
+view: dba_users , dba_ts_quotas
+
+# TABLESPACE INFORMATION:
+select tablespace_name,initial_extent,next_extent,min_extents,max_extents,pct_increase,status,contents
+from dba_tablespaces
+order by tablespace_name
+/
+create tablespace work
+datafile '/home/oracle/oradata/orcl/work01.dbf' size 50M
+extent management local autoallocate
+/
+
+create tablespace webtrade datafile '/home/oracle/oradata/orcl/webtrade01.dbf' size 200M 
+~  
+
+~ $ exp file=/home/oracle/learning/outln.dmp userid=outln/guolei owner=outln
+#.  alter user outln default tablespace tools; 
+#. revoke unlimited tablespace from outln; 
+#. alter user outln quota 0k on system; 
+#. alter user outln quota unlimited on tools; 
+# outln@ORCL10g> drop table ol$;
+# outln@ORCL10g> drop table ol$hints;
+# outln@ORCL10g> drop table ol$nodes;
+
+
+查询没有索引的表：
+select table_name, constraint_name,
+	cname1 || nvl2(cname2,','||cname2,null) ||
+  	nvl2(cname3,','||cname3,null) || nvl2(cname4,',' || cname4, null) ||
+ 	nvl2(cname5, ',' || cname5, null) || nvl2(cname6, ',' || cname6, null) ||
+  	nvl2(cname7, ',' || cname7, null) || nvl2(cname8, ',' || cname8, null) columns
+  from (select b.table_name, b.constraint_name,
+ 	max(decode(position, 1, column_name, null)) cname1,
+  	max(decode(position, 2, column_name, null)) cname2,
+    	max(decode(position, 3, column_name, null)) cname3,
+   	max(decode(position, 4, column_name, null)) cname4,
+    	max(decode(position, 5, column_name, null)) cname5,
+    	max(decode(position, 6, column_name, null)) cname6,
+    	max(decode(position, 7, column_name, null)) cname7,
+    	max(decode(position, 8, column_name, null)) cname8,
+    	count(*) col_cnt
+    from (select substr(table_name, 1, 30) table_name,
+         substr(constraint_name, 1, 30) constraint_name,
+         substr(column_name, 1, 30) column_name,
+         position
+         from user_cons_columns) a,
+         user_constraints b
+         where a.constraint_name = b.constraint_name
+         and b.constraint_type = 'R'
+         group by b.table_name, b.constraint_name
+ ) cons
+ where col_cnt > ALL
+   (select count(*)
+          from user_ind_columns i
+          where i.table_name = cons.table_name
+          and i.column_name in (cname1, cname2, cname3, cname4, cname5,
+          cname6, cname7, cname8)
+          and i.column_position <= cons.col_cnt
+          group by i.index_name
+          )
+/
+
+### 
+SQL> create user openjms identified by openjms default tablespace users;
+
+SQL> create user citytest identified by citytest default tablespace users;
+SQL> create user citylogtest identified by citylogtest default tablespace users;
+
+SQL> grant connect,resource to citytest;
+revoke connect from citytest;
+tnsping ;
+
+create user zxzq identified by guolei default tablespace webtrade;
+>imp system file=citicstrade_20110323.dmp fromuser=citicstrade touser=zxzq
+
+
+$ product/10.2.0.1/bin/imp /home/mg/Downloads/cityuion/oracle/101.5.20090504/city.dmp
+> /home/mg/Downloads/cityuion/oracle/101.5.20090504/city.dmp
+imp webtrade_zxzq/guolei file='/home/mg/Downloads/CssWeb/citics/webtrade_zxzq.dmp' full=y
+
+
+
+alter table table_name add (col1 type,col2 type);
+
+ALTER TABLE TABLE_AAA ADD (STOCKMAN NUMBER(18))//添加一列
+
+#COMMENT ON COLUMN TABLE_AAA.STOCKMAN IS '管理人员' //给列添加注释
+#comment on column tb_rd_user_info.reg_mac is '注册MAC地址';
+ALTER TABLE TABLE_AAA ADD CONSTRAINT FK_TABLE_AAA_R_TABLE_BBB_S FOREIGN KEY (STOCKMAN) REFERENCES TABLE_BBB (ID)//给列添加外键 
+
+    * ALTER TABLE (表名) ADD (列名 数据类型);
+    * ALTER TABLE (表名) MODIFY (列名 数据类型);
+    * ALTER TABLE (表名) RENAME COLUMN (当前列名) TO (新列名);
+    * ALTER TABLE (表名) DROP COLUMN (列名);
+    * ALTER TABLE (当前表名) RENAME TO (新表名);
+
+
+alter table tb_rd_user_info add(ban_acc_datetime date default sysdate)
+comment on column tb_rd_user_info.ban_acc_datetime is '帐号停封日期';
+
+##停其他用户的job
+SQL>exec sys.dbms_ijob.broken(98,true);
+## exec dbms_ijob.broken(8, true);
+
+create or replace procedure pro_rp_user_rg
+is
+        ucount number;
+        areaid number;
+        udate date;
+        cursor mycur is select area_id from tb_area where flag = 0;
+begin
+        udate := trunc(sysdate) - 1;
+        select count(id) into ucount from tb_report t where t.numdate=udate and t.type=1;
+        if ucount=0 then
+                open mycur;
+                loop
+                        fetch mycur into areaid;
+                        exit when mycur %notfound;
+                        select count(t.user_id) into ucount from tb_rd_user_info t where trunc(t.tim) =udat$
+                        insert into tb_report (id, num, type, numdate, area_id) values (id_seq.nextval, uco$
+                end loop;
+                commit;
+                close mycur;
+        end if;
+end pro_rp_user_rg;
+/
+
+create or replace procedure displayvariable (a in varchar2, b in varchar2) 
+as 
+begin 
+dbms_output.put_line('a is '||a); 
+dbms_output.put_line('b is '||b); 
+end displayvariable;
+
+create or replace procedure displayvariable
+is
+        ucount number;
+        areaid number;
+        udate date;
+        cursor mycur is select area_id from tb_area where flag = 0;
+begin
+        dbms_output.put_line('a is ');
+        dbms_output.put_line('b is ');
+        udate := trunc(sysdate) - 1;
+        select count(id) into ucount from tb_report t where t.numdate = udate and t.type = 1;
+        if ucount = 0 then
+                open mycur;
+                loop
+                        fetch mycur into areaid;
+                        exit when mycur %notfound;
+                        select count(t.user_id) into ucount
+                         from tb_rd_user_info t
+                         where trunc(t.tim) = udate and t.user_area = areaid;
+                        insert into tb_report (id, num, type, numdate, area_id)
+                         values (id_seq.nextval, ucount, 1, udate, areaid);
+                end loop;
+                close mycur;
+        end if;
+end displayvariable;
+/
+
+
+
+
+### 
+select job, next_sec, failures, what from dba_jobs；
+select job,next_sec,failures, what from user_jobs；
+SQL> update dba_jobs set interval='sysdate + 1 / (24 * 2)' where job = 21;
+SQL> delete from dba_jobs where job = 62
+SQL> SHOW ERRORS;
+
+select to_char(trunc(sysdate), 'YYYY-MM-DD HH24:mi:ss') from dual;
+TO_CHAR(TRUNC(SYSDA
+-------------------
+2009-03-11 00:00:00
+select to_char(trunc(sysdate) + 1, 'YYYY-MM-DD HH24:mi:ss') from dual
+TO_CHAR(TRUNC(SYSDA
+-------------------
+2009-03-12 00:00:00
+
+select trunc(sysdate ,'dd') from dual ;   --  2007-9-19
+select trunc(sysdate ,'yyyy') from dual ;   --2007-1-1
+select trunc(sysdate ,'mm') from dual ;   --2007-9-1
+
+   
+1、create sequence
+
+      create sequence seq_id
+      minvalue 1
+      start with 1
+      increment by 1
+      cache 20;
+
+2. hbm.xml:
+   
+     <id column="ID0000" name="id" type="integer">
+         <generator class="sequence">
+              <param name="sequence">seq_id</param>
+         </generator>
+     </id>
+
+#  hibernate: select seq_id.nextval from dual
+
+
+#######--------------------------- Oracle System  -------------------------- #######################
+SQL> select name, size_for_estimate, size_factor, estd_physical_read_factor from v$db_cache_advice;
+
+0_0> column name format a20;
+0_0> column S format 999,999,999 heading 'Size value'
+select name, to_number(value) S
+    from v$parameter
+    where name in (
+    'sga_max_size', 'sga_target',
+    'pga_aggregate_target',
+    'shared_pool_size',
+    'db_cache_size', 'shared_pool_size');
+/
+NAME		       Size value
+-------------------- ------------
+sga_max_size	           134,217,728
+shared_pool_size         54,525,952
+sga_target	            134,217,728
+db_cache_size	             20,971,520
+pga_aggregate_target   20,971,520
+
+SQL> alter system set shared_pool_size = 50M;
+SQL> alter system set db_cache_size = 20M;
+SQL> alter system set pga_aggregate_target = 20M;
+#set sga_max_size = 128M;
+# alter system set sga_max_size=200M scope=spfile; 
+# Alter System set parameter = value Scope = Memory | Spfile | Both;
+# alter system set sga_target=196M;
+SQL> create pfile='/home/oracle/pfile' from spfile; 
+
+select name, value, isdefault, isses_modifiable, issys_modifiable
+    from v$parameter
+    where name like '%pool%'
+    and isdeprecated <> 'TRUE'
+    order by 1;
+## setup spfile
+sqlplus /nolog
+connect sys/ as sysdba
+0_0> create spfile from pfile='/home/oracle/pfile';
+0_0> startup
+#######--------------------------- Oracle System  -------------------------- #######################
+
+
+# sys@MG10g> grant select on V_$session_event to marlgl;
+# marlgl@MG10g> alter session set timed_statistics=true;
+# marlgl@MG10g> create global temporary table sess_event
+    on commit preserve rows
+    as
+    select * from v$session_event where 1=0;
+
+Table created.
+
+# marlgl@MG10g> truncate table sess_event;
+
+Table truncated.
+
+# marlgl@MG10g> insert into sess_event
+  2  select * from v$session_event
+  3  where sid=(select sid from v$mystat where rownum=1);
+
+5 rows created.
+
+declare
+    l_number number;
+begin
+	for i in 1 .. 10000
+	loop
+		l_number := dbms_random.random;
+
+		execute immediate
+		'insert into t values ( ' || l_number || ',' ||
+				            l_number || ',' ||
+				            l_number || ',' ||
+				            l_number || ')';
+	end loop;
+	commit;
+end;
+/
+# use bind variables
+declare
+	l_number number;
+begin
+	for i in 1 .. 10000
+	loop
+		l_number := dbms_random.random;
+
+		insert into t
+			values(l_number, l_number, l_number, l_number);
+	end loop;
+	commit;
+end;
+/
+
+marlgl@MG10g> ed
+select a.event,
+    (a.total_waits - nvl(b.total_waits,0)) total_waits,
+    (a.time_waited - nvl(b.time_waited,0)) time_waited
+ from (  select *
+       from v$session_event
+       where sid = (select sid from v$mystat where rownum = 1) ) a
+  INNER JOIN
+      sess_event b
+  on a.event = b.event
+  where (a.total_waits - nvl(b.total_waits,0)) > 0
+/
+
+# where a.event = b.event(+) and ...
+marlgl@MG10g> /
+EVENT                                                            TOTAL_WAITS TIME_WAITED
+---------------------------------------------------------------- ----------- -----------
+control file sequential read                                              19           4
+log file sync                                                              1           0
+db file sequential read                                                    4           3
+SQL*Net message to client                                                 10           0
+SQL*Net message from client                                                9        7004
+
+EVENT                                                            TOTAL_WAITS TIME_WAITED
+---------------------------------------------------------------- ----------- -----------
+local write wait                                                           3           1
+enq: RO - fast object reuse                                                1           1
+log file sync                                                              2           1
+db file sequential read                                                    7           1
+SQL*Net message to client                                                 24           0
+SQL*Net message from client                                               23        6137
+events in waitclass Other                                                  4           1
+
+7 rows selected.
+
+marlgl@MG10g> create table t as
+  2  select * from all_objects;
+
+# marlgl@MG10g> create index t_idx_name on t(object_name);
+
+# marlgl@MG10g> create index t_idx_type on t(object_type);
+
+marlgl@MG10g> analyze table t compute statistics
+  2  for all indexed columns
+  3  for table;
+
+Table analyzed.
+
+marlgl@MG10g> variable search_str varchar2(25)
+marlgl@MG10g> exec :search_str := '%';
+
+### AUTOTRACE
+# set autotrace off
+# set autotrace on explain
+# set autotrace on statistics
+# set autotrace on
+# set autotrace traceonly
+#
+# marlgl@MG10g> set autotrace traceonly
+marlgl@MG10g> select * from t 
+    where object_name like :search_str 
+    and object_type in ('FUNCTION', 'PROCEDURE', 'TRIGGER');
+
+239 rows selected.
+
+
+Execution Plan
+----------------------------------------------------------
+Plan hash value: 612087603
+
+------------------------------------------------------------------------------------------------
+| Id  | Operation                         | Name       | Rows  | Bytes | Cost (%CPU)| Time     |
+------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                  |            |    12 |  1176 |    10  (10)| 00:00:01 |
+|   1 |  TABLE ACCESS BY INDEX ROWID      | T          |    12 |  1176 |    10  (10)| 00:00:01 |
+|   2 |   BITMAP CONVERSION TO ROWIDS     |            |       |       |            |          |
+|   3 |    BITMAP AND                     |            |       |       |            |          |
+|   4 |     BITMAP OR                     |            |       |       |            |          |
+|   5 |      BITMAP CONVERSION FROM ROWIDS|            |       |       |            |          |
+|*  6 |       INDEX RANGE SCAN            | T_IDX_TYPE |   240 |       |     1   (0)| 00:00:01 |
+|   7 |      BITMAP CONVERSION FROM ROWIDS|            |       |       |            |          |
+|*  8 |       INDEX RANGE SCAN            | T_IDX_TYPE |   240 |       |     1   (0)| 00:00:01 |
+|   9 |      BITMAP CONVERSION FROM ROWIDS|            |       |       |            |          |
+|* 10 |       INDEX RANGE SCAN            | T_IDX_TYPE |   240 |       |     1   (0)| 00:00:01 |
+|  11 |     BITMAP CONVERSION FROM ROWIDS |            |       |       |            |          |
+|  12 |      SORT ORDER BY                |            |       |       |            |          |
+|* 13 |       INDEX RANGE SCAN            | T_IDX_NAME |   240 |       |     3   (0)| 00:00:01 |
+------------------------------------------------------------------------------------------------
+
+Predicate Information (identified by operation id):
+---------------------------------------------------
+
+   6 - access("OBJECT_TYPE"='FUNCTION')
+   8 - access("OBJECT_TYPE"='PROCEDURE')
+  10 - access("OBJECT_TYPE"='TRIGGER')
+  13 - access("OBJECT_NAME" LIKE :SEARCH_STR)
+       filter("OBJECT_NAME" LIKE :SEARCH_STR AND "OBJECT_NAME" LIKE :SEARCH_STR)
+
+
+Statistics
+----------------------------------------------------------
+        206  recursive calls
+          0  db block gets
+        121  consistent gets
+          0  physical reads
+          0  redo size
+      11850  bytes sent via SQL*Net to client
+        550  bytes received via SQL*Net from client
+         17  SQL*Net roundtrips to/from client
+          5  sorts (memory)
+          0  sorts (disk)
+        239  rows processed
+
+marlgl@MG10g>
+
+
+
+## trace level
+grant alter session to citytest;
+alter session set SQL_TRACE=true;
+
+sys@orcl10g> create user rman_user identified by rman_user default tablespace data temporary tablespace temp;
+
+sql>grant connect,resource,recovery_catalog_owner to rman_user;
+
+#/opt/ora9/product/9.2/bin/imp dbth_bak/dbth_bak  
+# file=/root/ora_back/orabackup/db080108.dmp  
+# log=/root/ora_back/orabackup/db080108.log 
+# full=y 
+# buffer=4096000 
+# commit=y 
+# ignore=y 
+# feedback=10000
+$/opt/ora9/product/9.2/bin/exp cityth/dbthcity6831869 file=/root/table/city1.dmp log=/root/table/city1.log 
+$/opt/ora9/product/9.2/bin/imp dbth_bak/dbth_bak  file=/root/ora_back/orabackup/db080108.dmp  log=/root/ora_back/orabackup/db080108.log full=y buffer=4096000 commit=y ignore=y feedback=10000
+
+4. 如何分析和执行SQL语句
+写多表连接SQL语句时要知道它的分析执行计划的情况.
+Sys用户下运行@/ORACLE_HOME/sqlplus/admin/plustrce.sql
+ 产生plustrace角色
+ #SQL> grant plustrace to &username;
+一般用户下运行@/ORACLE_HOME/rdbms/admin/utlxplan.sql
+ 产生plan_table
+#hginfo@ORCL10g> @/home/oracle/product/10.2.0.1/rdbms/admin/utlxpls
+#hginfo@ORCL10g> set autotrace traceonly explain
+#hginfo@ORCL10g> set autotrace off
+
+SQL> set time on;   说明：打开时间显示
+SQL> set autotrace on;    说明：打开自动分析统计，并显示SQL语句的运行结果
+SQL> set autotrace traceonly;  说明：打开自动分析统计，不显示SQL语句的运行结果
+接下来你就运行测试SQL语句，看到其分析统计结果了。
+一般来讲，我们的SQL语句应该避免大表的全表扫描。
+SQL> set autotrace off;   说明：关闭自动分析统计
+
+
+### ------------------ trace level
+#1. Enable trace at instance level
+Put the following line in init.ora. It will enable trace for all sessions and the background processes
+sql_trace = TRUE
+to disable trace:
+sql_trace = FALSE
+- or -
+# to enable tracing without restarting database run the following command in sqlplus
+SQLPLUS> ALTER SYSTEM SET trace_enabled = TRUE;
+to stop trace run:
+SQLPLUS> ALTER SYSTEM SET trace_enabled = FALSE;
+
+#2. Enable trace at session level
+to start trace:
+ALTER SESSION SET sql_trace = TRUE;
+to stop trace:
+ALTER SESSION SET sql_trace = FALSE;
+- or - 
+EXECUTE dbms_session.set_sql_trace (TRUE);
+EXECUTE dbms_session.set_sql_trace (FALSE);
+- or -
+EXECUTE dbms_support.start_trace;
+EXECUTE dbms_support.stop_trace;
+### ----------------------------------------- 
+
+# SQL> drop user "CITYDB" CASCADE
+
+### ----------------------------------------------------------------------- set Pfile ------------------------------
+0_0> column phys format 999,999,999 heading 'Physical Reads'
+0_0> column gets format 999,999,999 heading ' DB Block Gets'
+0_0> column con_gets format 999,999,999 heading 'Consistent Gets'
+0_0> column hitratio format 999.99 heading ' Hit Ratio'
+
+select sum(decode(name, 'physical reads',value,0)) phys,
+	sum(decode(name, 'db block gets',value,0)) gets,
+	sum(decode(name, 'consistent gets', value, 0)) con_gets,
+	(1 - 
+		( sum(decode(name, 'physical reads', value, 0)) /
+			  ( sum(decode(name, 'db block gets', value, 0)) + sum(decode(name, 'consistent gets', value, 0)) )
+		)
+	) * 100 hitratio
+from v$sysstat;
+
+Physical Reads	DB Block Gets Consistent Gets  Hit Ratio
+-------------- -------------- --------------- ----------
+	 5,779		6,770	       45,896	   89.03
+
+select (( 1 - ( sum(getMisses) / ( sum(gets) + sum(getMisses) ) ) ) * 100) "Hit Rate"
+from v$RowCache
+where gets + getMisses <> 0;
+  Hit Rate
+----------
+ 89.890665
+
+col value for 999,999,999,999 heading "Shared Pool Size"
+col bytes for 999,999,999,999 heading "Free Bytes"
+select to_number(v$parameter.value) value, v$sgastat.bytes,
+	(v$sgastat.bytes/v$parameter.value)*100 "Percent Free"
+from v$sgastat, v$parameter
+where v$sgastat.name = 'free memory'
+and v$parameter.name = 'shared_pool_size'
+and v$sgastat.pool = 'shared pool';
+
+Shared Pool Size       Free Bytes Percent Free
+---------------- ---------------- ------------
+      20,971,520       13,301,960    63.428688
+
+0_0> select sum(ksmchsiz) Bytes, ksmchcls Status
+  2  from x$ksmsp
+  3  group by ksmchcls;
+
+      Free Bytes STATUS
+---------------- --------
+      14,075,220 freeabl
+      15,424,720 recr
+	     816 R-freea
+      38,721,496 perm
+       3,619,096 R-free
+       3,655,116 free
+
+6 rows selected.
+### -----------------------------------------------------------------------
+
+#  Runstats
+sys@ORCL10g> grant select on v_$mystat to marlgl;
+sys@ORCL10g> grant select on v_$statname to marlgl;
+sys@ORCL10g> grant select on v_$latch to marlgl;
+
+# grant creat view privileges
+sys@ORCL10g> grant create any view to marlgl;
+sys@ORCL10g> grant drop any view to marlgl;
+sys@ORCL10g> grant merge any view to marlgl;
+sys@ORCL10g> grant under any view to marlgl;
+
+create or replace view stats
+as
+    select 'STAT...' || a.name name, b.value
+    from v$statname a, v$mystat b
+    where a.statistic# = b.statistic#
+    union all
+    select 'LATCH.' || name, gets
+    from v$latch
+/
+# Create temporary table
+create global temporary table run_stats
+( runid varchar2(15),
+    name varchar2(80),
+    value int )
+on commit preserve rows
+/
+# Runstats Package
+# RS_START
+create or replace package runstats_pkg
+as
+    procedure rs_start;
+    procedure rs_middle;
+    procedure rs_stop( p_difference_threshold in number default 0 );
+end;
+/
+
+
+  1  create or replace package body runstats_pkg
+  2  as
+  3  g_start	number;
+  4  g_run1	number;
+  5  g_run2	number;
+  6  procedure rs_start
+  7  is
+  8  begin
+  9  	delete from run_stats;
+ 10  	insert into run_stats
+ 11  	select 'before', stats.* from stats;
+ 12  	g_start := dbms_utility.get_time;
+ 13  end;
+ 14  procedure rs_middle
+ 15  is
+ 16  begin
+ 17  	g_run1 := (dbms_utility.get_time - g_start);
+ 18  	insert into run_stats
+ 19  	select 'after 1', stats.* from stats;
+ 20  	g_start := dbms_utility.get_time;
+ 21  end;
+ 22  procedure rs_stop(p_difference_threshold in number default 0)
+ 23  is
+ 24  begin
+ 25  	g_run2 := (dbms_utility.get_time - g_start);
+ 26  	dbms_output.put_line( 'Run1 ran in ' || g_run1 || ' hsecs' );
+ 27  	dbms_output.put_line( 'Run2 ran in ' || g_run2 || ' hsecs' );
+ 28  	dbms_output.put_line( 'run 1 ran in ' ||
+ 29  		round(g_run1 / g_run2 * 100, 2) ||
+ 30  		'% of the time' );
+ 31  	dbms_output.put_line( chr(9) );
+ 32  	insert into run_stats
+ 33  	select 'after 2', stats.* from stats;
+ 34  	dbms_output.put_line
+ 35  	( rpad( 'Name', 30 ) || lpad( 'Run1', 10 ) ||
+ 36  	  lpad( 'Run2', 10 ) || lpad( 'Diff', 10 ) );
+ 37  	for x in
+ 38  	( select rpad( a.name, 30 ) ||
+ 39  		 to_char( b.value-a.value, '9,999,999' ) ||
+ 40  		 to_char( c.value-b.value, '9,999,999' ) ||
+ 41  		 to_char( ( (c.value-b.value)-(b.value-a.value)), '9,999,999' ) data
+ 42  	from run_stats a, run_stats b, run_stats c
+ 43  	where a.name = b.name
+ 44  	  and b.name = c.name
+ 45  	  and a.runid = 'before'
+ 46  	  and b.runid = 'after 1'
+ 47  	  and c.runid = 'after 2'
+ 48  	  and (c.value-a.value) > 0
+ 49  	  and abs( (c.value-b.value) - (b.value-a.value) )
+ 50  		> p_difference_threshold
+ 51  	order by abs( (c.value-b.value)-(b.value-a.value) )
+ 52  	) loop
+ 53  		dbms_output.put_line( x.data );
+ 54  	end loop;
+ 55  		dbms_output.put_line( chr(9) );
+ 56  	dbms_output.put_line
+ 57  	( 'Run1 latches total versus runs -- difference and pct' );
+ 58  	dbms_output.put_line
+ 59  	( lpad( 'Run1', 10 ) || lpad( 'Run2', 10 ) ||
+ 60  	  lpad( 'Diff', 10 ) || lpad( 'Pct', 8 ) );
+ 61  	for x in
+ 62  	( select to_char( run1, '9,999,999' ) ||
+ 63  		to_char( run2, '9,999,999' ) ||
+ 64  		to_char( diff, '9,999,999' ) ||
+ 65  		to_char( round( run1/run2*100, 2 ), '999.99' ) || '%' data
+ 66  	  from ( select sum(b.value-a.value) run1, sum(c.value-b.value) run2,
+ 67  			sum( (c.value-b.value)-(b.value-a.value) ) diff
+ 68  		 from run_stats a, run_stats b, run_stats c
+ 69  		 where a.name = b.name
+ 70  			and b.name = c.name
+ 71  			and a.runid = 'before'
+ 72  			and b.runid = 'after 1'
+ 73  			and c.runid = 'after 2'
+ 74  			and a.name like 'LATCH%'
+ 75  		)
+ 76  	) loop
+ 77  		dbms_output.put_line( x.data );
+ 78  	end loop;
+ 79  end;
+ 80* end;
+
+
+# to drop it.
+#sql> @?\rdbms\admin\spdrop.sql
+#sys@ORCL10g> @/home/oracle/product/10.2.0.1/rdbms/admin/spcreate.sql
+
+# to take snapshots.
+#sys@ORCL10g> exec statspack.snap
+# to create a report.
+#sys@ORCL10g> @/home/oracle/product/10.2.0.1/rdbms/admin/spreport.sql
+#/home/oracle/xx.lst
+
+sys@ORCL10g> !oerr ora 1531
+
+select name,sql_text
+  2  from user_outlines
+  3  where category='HR_APPLICATION'
+  4  /
+
+###----------------------------------------- TKPROF ----------------------------------------------------
+# The tkprof process will be explained in six easy steps.
+#
+# Step 1: Check the Environment 
+#
+#   Enable Timed Statistics– This parameter enables the collection of certain vital statistics such as CPU
+# execution time, wait events, and elapsed times.  The resulting trace output is more meaningful with these
+# statistics.  The command to enable timed statistics is:
+
+#  sys@MG10g> ALTER SYSTEM SET TIMED_STATISTICS = TRUE; 
+#  zszqmsg@MG10g> ALTER session SET TIMED_STATISTICS = TRUE;
+#
+#   Check the User Dump Destination Directory – The trace files generated by Oracle can be numerous and large.
+# These files are placed by Oracle in user_dump_dest directory as specified in the init.ora.  The user dump
+# destination can also be specified for a single session using the alter session command.  Make sure that enough
+# space exists on the device to support the number of trace files that you expect to generate. 
+#
+# sys@MG10g> select value
+    from v$parameter
+    where name = 'user_dump_dest';
+
+    VALUE
+    ----------------------------------------------------
+    D:\ORACLE\PRODUCT\10.2.0\ADMIN\MG\UDUMP
+# 
+# Step 2: Turn Tracing On 
+#
+# Tracing can be defined at the session level:
+#  SQL> ALTER SESSION SET SQL_TRACE = TRUE;
+#  SQL> DBMS_SESSION.SET_SQL_TRACE(TRUE);
+#
+#  A DBA may enable tracing for another user’s session by:
+#  SQL> DBMS_SYSTEM.SET_SQL_TRACE_IN_SESSION(sid,serial#,true);
+#  where the sid (Session ID) and serial# can be obtained from the v$session view.  
+#  This package is owned by the SYS user and therefore the executor must be SYS or be 
+#  granted EXECUTE the privilege by SYS user.
+#
+# 
+
+zszqmsg@MG10g> alter session set sql_trace = true;
+zszqmsg@MG10g> sql;
+zszqmsg@MG10g> alter session set sql_trace = false;
+
+sys@MG10g> column username format a10
+sys@MG10g> column trace_file format a70
+sys@MG10g> grant select on v_$process to zszqmsg;
+sys@MG10g> grant select on v_$parameter to zszqmsg;
+sys@MG10g> grant select on v_$session to zszqmsg;
+
+sys@MG10g> 
+    select b.username, c.value || '\' || lower(d.value) || '_ora_' ||
+        to_char(a.spid, 'fm00000') || '.trc' "TRACE_FILE"
+        from v$process a, v$session b, v$parameter c, v$parameter d
+        where a.addr   = b.paddr
+        and c.name     = 'user_dump_dest'
+        and d.name     = 'db_name'
+        and b.username is not null
+    /
+
+USERNAME   TRACE_FILE
+---------- ----------------------------------------------------------------------
+SYS        D:\ORACLE\PRODUCT\10.2.0\ADMIN\MG\UDUMP\mg_ora_02432.trc
+ZSZQMSG    D:\ORACLE\PRODUCT\10.2.0\ADMIN\MG\UDUMP\mg_ora_03340.trc  
+# 
+# The script below will return the file name for the current session. 
+
+marlgl@MG10g>
+    select c.value || '\' || lower(d.value) || '_ora_' ||
+        to_char(a.spid, 'fm00000') || '.trc' "TRACE FILE"
+    from v$process a, v$session b, v$parameter c, v$parameter d
+    where a.addr = b.paddr
+        and b.audsid = userenv('sessionid')
+        and c.name   = 'user_dump_dest'
+        and d.name   = 'db_name'
+    /
+#   
+#
+# Step 3: Turn Tracing Off
+#
+# The same options that we use to enable tracing are used to disable it.  These include:
+# 
+# sys@MG10g> grant alter session to zszqmsg; 
+# 
+# ALTER SESSION SET SQL_TRACE = FALSE;
+# DBMS_SESSION.SET_SQL_TRACE(FALSE);
+# 
+# To disable tracing for another user’s session use:
+#  DBMS_SYSTEM.SET_SQL_TRACE_IN_SESSION(sid,serial#,false);
+marlgl@MG10g> select sid, serial#, username from v$session;
+
+       SID    SERIAL# USERNAME
+---------- ---------- ------------------------------
+       150         41 MARLGL
+
+sys@MG10g> @oracle/mg/start_trace.sql
+
+Procedure created.
+
+sys@MG10g> exec start_trace(150, 41, 20);
+Tracing Started for User: MARLGL
+Tracing Start Time: 01-25-2011 10:40:27
+Tracing Stop Time: 01-25-2011 10:40:47
+Trace Directory: D:\ORACLE\PRODUCT\10.2.0\ADMIN\MG\UDUMP
+Trace Filename: mg_ora_2576.trc
+
+PL/SQL procedure successfully completed.
+
+#  
+#  Step 4: Locate Trace File and Execute tkprof
+#  tkprof ORCL92_ora_3064.trc output.txt insert=tkprof.sql record=Allsql.sql
+#  D:\oracle\product\10.2.0\admin\mg\udump>tkprof mg_ora_2420.trc output.txt insert=tkprof.sql record=Allsql.sql
+#  cd D:\oracle\tkprof
+D:\oracle\tkprof>tkprof D:\oracle\product\10.2.0\admin\mg\udump\mg_ora_2420.trc output.txt insert=tkprof.sql record=Allsql.sql
+#
+# Step 5: Analyze tkprof Output 
+#
+1.   Parse – The translation of the SQL into an execution plan.  
+            This step includes syntax checks, permissions, and all object dependencies.
+2.   Execute – The actual execution of the statement.
+3.   Fetch – The number of rows returned for a SELECT statement.
+
+The table columns include the following:
+
+·     Count – The number of times a statement was parsed, executed, or fetched.
+·     CPU – The total CPU time in seconds for all parse, execute, or fetch calls.
+·     Elapsed – Total elapsed time in seconds for all parse, execute, or fetch calls.
+·     Disk – The number of physical disk reads from the datafiles for all parse, execute, or fetch calls.
+·     Query – The number of buffers retrieved for all parse, execute, or fetch calls.
+·     Current – The number of buffers retrieved in current mode (INSERT, UPDATE, or DELETE statements). 
+# 
+#
+# Step 6: Load tkprof Results into Tables
+#
+# tkprof mg_ora_27576.trc session.txt explain=system/manager aggregate=yes sys=no waits=yes sort=fchela
+#
+# sys=no：表示阻止所有以sys用户执行的sql被显示出来，默认为YES
+# aggregate=yes|no 若用户指定AGGREGATE=NO，TKPROF将不会对相同SQL文本的多个用户进行汇总
+# waits=yes|no Record summary for any wait events found in the trace file.
+#
+#
+#
+#
+# Parse：这步将SQL语句转换成执行计划，包括检查是否有正确的授权和所需要用到的表、列以及其他引用到的对象是否存在。
+# Execute： 这步是真正的由Oracle来执行语句。对于insert、update、delete操作，这步会修改数据，对于select操作,这步就只是确定选择的记录
+# Fetch： 返回查询语句中所获得的记录，这步只有select语句会被执行。
+# COUNT: 这个语句被parse、execute、fetch的次数。
+
+CPU： 这个语句对于所有的parse、execute、fetch所消耗的cpu的时间，以秒为单位。
+ELAPSED： 这个语句所有消耗在parse、execute、fetch的总的时间。
+DISK： 从磁盘上的数据文件中物理读取的块的数量。一般来说更想知道的是正在从缓存中读取的数据而不是从磁盘上读取的数据
+QUERY： 在一致性读模式下，所有parse、execute、fetch所获得的buffer的数量。 一致性模式的buffer是用于给一个长时间运行的事务提供一个一致性读的快照，缓存实际上在头部存储了状态。
+CURRENT： 在current模式下所获得的buffer的数量。一般在current模式下执行insert、update、delete操作都会获取 buffer。在current模式下如果在高速缓存区发现有新的缓存足够给当前的事务使用，则这些buffer都会被读入了缓存区中。
+ 所有SQL语句返回的记录数目，但是不包括子查询中返回的记录数目。对于select语句，返回记录是在fetch这步，
+对于insert、update、delete操作，返回记录则是在execute这步。
+#
+#
+1. query+current/rows 平均每行所需的block数，太大的话（超过20）SQL语句效率太低
+2. Parse count/Execute count parse count应尽量接近1，如果太高的话，SQL会进行不必要的reparse。
+要检查Pro*C程序的MAXOPENCURSORS是不是太低了，或不适当的使用的RELEASE_CURSOR选项
+3. rows Fetch/Fetch Fetch Array的大小，太小的话就没有充分利用批量Fetch的功能，
+增加了数据在客户端和服务器之间的往返次数。在Pro*C中可以用prefetch=NN,Java/JDBC中可调用SETROWPREFETCH,
+在PL/SQL中可以用BULK COLLECT,SQLPLUS中的arraysize(缺省是15)　　
+4. disk/query+current 磁盘IO所占逻辑IO的比例，太大的话有可能是db_buffer_size过小(也跟SQL的具体特性有关)　　
+5. elapsed/cpu 太大表示执行过程中花费了大量的时间等待某种资源　　
+6. cpu　OR　elapsed 太大表示执行时间过长，或消耗了大量的CPU时间，应该考虑优化
+7.　执行计划中的Rows 表示在该处理阶段所访问的行数，要尽量减少
+
+#
+#
+# get trace path
+select rtrim(c.value, '/') || '/' || d.instance_name || '_ora_' || ltrim(to_char(a.spid)) || '.trc'
+from v$process a, v$session b, v$parameter c, v$instance d
+where a.addr = b.paddr
+ and b.audsid = sys_context( 'userenv', 'sessionid' )
+ and c.name = 'user_dump_dest'
+/
+
+begin
+    for i in 1 .. 1000
+    loop
+        execute immediate 'insert into t values ( :x )' using i;
+    end loop;
+end;
+/
+
+sys@ORCL10g> select dbid, name, log_mode from v$database;
+
+      DBID NAME 			  LOG_MODE
+---------- ------------------------------ ------------
+1213102485 ORCL 			  ARCHIVELOG
+
+
+select owner,object_name,object_type, created,last_ddl_time,timestamp
+from all_objects where owner='SYS'
+and created between to_date('2010-02-26:16:20:08', 'YYYY-MM-DD HH24:mi:ss')
+and to_date('2010-02-26:16:23:08', 'YYYY-MM-DD HH24:mi:ss')
+/
+
+
+select owner,object_name,object_type
+from all_objects where owner='SYS' and object_type='TABLE'
+and created between to_date('2010-02-26:16:20:08', 'YYYY-MM-DD HH24:mi:ss')
+and to_date('2010-02-26:16:23:08', 'YYYY-MM-DD HH24:mi:ss')
+/
+
+create or replace procedure drop_table
+(p_start in varchar2, p_end in varchar2)
+as
+begin
+    for x in ( select object_name
+        from all_objects
+        where owner='SYS'
+        and object_type='TABLE'
+        and created
+        between to_date(p_start, 'YYYY-MM-DD HH24:mi:ss')
+            and to_date(p_end, 'YYYY-MM-DD HH24:mi:ss') )
+    loop
+        dbms_output.put_line( 'Table : ' || to_char(x.object_name) );
+    end loop;
+end;
+/
+
+create or replace procedure drop_table
+(p_start in varchar2, p_end in varchar2)
+as
+    drop_cnt    number  := 0;
+    table_name  all_objects.object_name%type;
+    drop_table_rows number := 0;
+    drop_table_cnt  number := 0;
+begin
+    for x in ( select object_name
+        from all_objects
+        where owner='SYS'
+        and object_type='TABLE'
+        and created
+        between to_date(p_start, 'YYYY-MM-DD HH24:mi:ss')
+            and to_date(p_end, 'YYYY-MM-DD HH24:mi:ss') )
+    loop
+        drop_cnt := drop_cnt + 1;
+        table_name := x.object_name;
+        dbms_output.put_line( 'Table : ' || to_char(table_name) );
+        execute immediate
+        'select count(*) from ' || table_name into drop_table_rows;
+        --using table_name;
+        dbms_output.put_line( 'has ' || drop_table_rows || ' rows.' );
+        if drop_table_rows > 0
+        then
+            dbms_output.put_line(
+                    'drop table "SYS"."' || table_name || '" cascade constraints PURGE' );
+            drop_table_cnt := drop_table_cnt + 1;
+            execute immediate
+            'drop table "SYS"."' || table_name || '" cascade constraints PURGE';
+        end if;
+    end loop;
+    dbms_output.put_line( drop_cnt || ' tables,' || drop_table_cnt || ' tables droped.' );
+end;
+/
+
+exec drop_table('2010-02-26:16:20:08', '2010-02-26:16:23:08');
+
+drop table "SYS"."JB_ADVERTISEMENT" cascade constraints PURGE
+
+#scott@ORCL10g> break on deptno skip 1
+select ename,deptno,sal,
+sum(sal) over
+    (order by deptno,ename) running_total,
+sum(sal) over
+    (partition by deptno order by ename) department_total,
+row_number() over
+    (partition by deptno order by ename) seq
+from emp
+order by deptno,ename
+/
+# Dense_rank() - 序号没有跳跃
+# Rank() - 序号跳跃
+
+
+CONNECT sys/password@service AS SYSDBA
+@$ORACLE_HOME/rdbms/admin/tracetab.sql
+
+CREATE PUBLIC SYNONYM plsql_trace_runs FOR plsql_trace_runs;
+CREATE PUBLIC SYNONYM plsql_trace_events FOR plsql_trace_events;
+CREATE PUBLIC SYNONYM plsql_trace_runnumber FOR plsql_trace_runnumber;
+GRANT SELECT, INSERT, UPDATE, DELETE ON plsql_trace_runs TO PUBLIC;
+GRANT SELECT, INSERT, UPDATE, DELETE ON plsql_trace_events TO PUBLIC;
+GRANT SELECT ON plsql_trace_runnumber TO PUBLIC;
+
+zszqmsg@DB> set sqlblanklines on
+zszqmsg@DB>  select client_id,
+  2     client_name,
+  3      client_sex
+  4      from user_info
+  5
+  6      where rownum < 10;
+
+# rlwrap sqlplus user/pwd@testdb
+# rlwrap rman target user/pwd@testdb
+#
+SQL> SELECT password FROM dba_users WHERE  username='SCOTT';
+PASSWORD
+--------------- ---------------
+F894844C34402B67
+#
+# SQL> ALTER USER scott IDENTIFIED BY VALUES 'F894844C34402B67';
+
+###
+### ----------------------------- Oracle Block -----------------------------------------
+#
+# data Block, index Block, undo Block
+#
+# 
+sys@MG10g> create tablespace test datafile 'd:\oracle\product\10.2.0\oradata\mg\test01.dbf'
+size 100m autoextend on next 20m
+maxsize unlimited
+/
+sys@MG10g> create tablespace citicstrade datafile 'd:\oracle\product\10.2.0\oradata\mg\citicstrade01.dbf'
+size 100m autoextend on next 20m 
+maxsize unlimited
+/
+
+
+marlgl@MG10g> create table block_test (id varchar2(4) primary key, name varchar2(20)) tablespace test;
+marlgl@MG10g> insert into block_test values('0001', 'MARLGL');
+marlgl@MG10g> select id, name, rowid from block_test;
+
+ID   NAME                           ROWID
+---- ------------------------------ ------------------
+0001 MARLGL                         AAANMCAAHAAAAAeAAA
+
+marlgl@MG10g> select dbms_rowid.rowid_relative_fno('AAANMCAAHAAAAAeAAA') file_num,
+  2  dbms_rowid.rowid_block_number('AAANMCAAHAAAAAeAAA') block_num
+  3  from dual;
+
+  FILE_NUM  BLOCK_NUM
+---------- ----------
+         7         30
+
+sys@MG10g> alter system dump datafile 7 block 30;
+
+System altered.
+
+
+# ---------------------------------------------------- mg_ora_3228.trc --------------------------
+# D:\oracle\product\10.2.0\admin\mg\udump
+#
+*** 2011-02-10 11:09:42.453
+*** SERVICE NAME:(SYS$USERS) 2011-02-10 11:09:42.437
+*** SESSION ID:(159.7) 2011-02-10 11:09:42.437
+Start dump data blocks tsn: 8 file#: 7 minblk 30 maxblk 30
+buffer tsn: 8 rdba: 0x01c0001e (7/30)
+scn: 0x0000.012cabb6 seq: 0x03 flg: 0x06 tail: 0xabb60603
+frmt: 0x02 chkval: 0x57fc type: 0x06=trans data
+Hex dump of block: st=0, typ_found=1
+Dump of memory from 0x07D02200 to 0x07D04200
+
+# ...
+
+Block header dump:  0x01c0001e
+ Object id on Block? Y
+ seg/obj: 0xd302  csc: 0x00.12ca8b3  itc: 2  flg: E  typ: 1 - DATA
+     brn: 0  bdba: 0x1c00019 ver: 0x01 opc: 0
+     inc: 0  exflg: 0
+ 
+ Itl           Xid                  Uba         Flag  Lck        Scn/Fsc
+0x01   0x0006.01c.00003366  0x00800074.0547.13  --U-    1  fsc 0x0000.012cabb6
+0x02   0x0000.000.00000000  0x00000000.0000.00  ----    0  fsc 0x0000.00000000
+ 
+data_block_dump,data header at 0x7d02264
+===============
+tsiz: 0x1f98
+hsiz: 0x14
+pbl: 0x07d02264
+bdba: 0x01c0001e
+     76543210
+flag=--------
+ntab=1
+nrow=1
+frre=-1
+fsbo=0x14
+fseo=0x1f89
+avsp=0x1f75
+tosp=0x1f75
+0xe:pti[0]	nrow=1	offs=0
+0x12:pri[0]	offs=0x1f89
+block_row_dump:
+tab 0, row 0, @0x1f89
+tl: 15 fb: --H-FL-- lb: 0x1  cc: 2
+col  0: [ 4]  30 30 30 31
+col  1: [ 6]  4d 41 52 4c 47 4c
+end_of_block_dump
+End dump data blocks tsn: 8 file#: 7 minblk 30 maxblk 30
+# ---------------------------------------------------- mg_ora_3228.trc --------------------------
+marlgl@MG10g> column dump(id) format a50;
+marlgl@MG10g> select id, dump(id) from block_test;
+
+ID   DUMP(ID)
+---- --------------------------------------------------
+0001 Typ=1 Len=4: 48,48,48,49
+
+marlgl@MG10g> column dump(name) format a50;
+marlgl@MG10g> select name, dump(name) from block_test;
+
+NAME                           DUMP(NAME)
+------------------------------ --------------------------------------------------
+MARLGL                         Typ=1 Len=6: 77,65,82,76,71,76
+
+
+sys@MG10g> select segment_name, blocks, extents, bytes, segment_type, tablespace_name 
+    from dba_segments where owner = 'MARLGL';
+
+SEGMENT_NAME                       BLOCKS    EXTENTS      BYTES SEGMENT_TYPE       TABLESPACE_NAME
+------------------------------ ---------- ---------- ---------- ------------------ ------------------------------
+T_IDX_TYPE                            128         16    1048576 INDEX              USERS
+T_IDX_NAME                            256         17    2097152 INDEX              USERS
+DEPT                                    8          1      65536 TABLE              USERS
+T                                     640         20    5242880 TABLE              USERS
+EMP_PK                                  8          1      65536 INDEX              USERS
+SYS_C007357                             8          1      65536 INDEX              TEST
+BLOCK_TEST                              8          1      65536 TABLE              TEST
+
+7 rows selected.
+
+sys@MG10g> select segment_name,segment_type,extent_id,blocks,bytes from dba_extents where owner='MARLGL';
+
+SEGMENT_NAME                   SEGMENT_TYPE        EXTENT_ID     BLOCKS      BYTES
+------------------------------ ------------------ ---------- ---------- ----------
+T                              TABLE                      18        128    1048576
+T                              TABLE                      19        128    1048576
+DEPT                           TABLE                       0          8      65536
+BLOCK_TEST                     TABLE                       0          8      65536
+
+sys@MG10g> select obj#, name from obj$ where name='BLOCK_TEST';
+
+      OBJ# NAME
+---------- ------------------------------
+     54018 BLOCK_TEST
+
+### Block Hash
+# sys@MG10g> select file#,block#,class#,status,xnc,objd from v$bh where objd=54018;
+
+     FILE#     BLOCK#     CLASS# STATUS         XNC       OBJD
+---------- ---------- ---------- ------- ---------- ----------
+         7         29          1 xcur             0      54018
+         7         32          1 xcur             0      54018
+         7         27          4 xcur             0      54018
+         7         30          1 xcur             0      54018
+         7         25          8 xcur             0      54018
+         7         28          1 xcur             0      54018
+         7         31          1 xcur             0      54018
+         7         26          9 xcur             0      54018
+
+8 rows selected.
+
+# GTJA 
+# create index
+#
+# before      -       after   (seconds)
+# 62.813      -       21.11  
+#             -       4.594
+# fund count 
+# 42.047    -       24.031
+# 39.656    -       23.75
+#
+#
+#
+
+24-JAN-2011 18:04:24 * service_died * mg * 12537
+
+# TNSLSNR for 32-bit Windows: Version 10.2.0.1.0 - Production on 25-JAN-2011 08:58:36
+
+# Copyright (c) 1991, 2005, Oracle.  All rights reserved.
+
+System parameter file is D:\oracle\product\10.2.0\db_mg\network\admin\listener.ora
+Log messages written to D:\oracle\product\10.2.0\db_mg\network\log\listener.log
+Trace information written to D:\oracle\product\10.2.0\db_mg\network\trace\listener.trc
+Trace level is currently 0
+
+Started with pid=3860
+Listening on: (DESCRIPTION=(ADDRESS=(PROTOCOL=ipc)(PIPENAME=\\.\pipe\EXTPROC1ipc)))
+Listening on: (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=marlgl)(PORT=1521)))
+Listener completed notification to CRS on start
+
+TIMESTAMP * CONNECT DATA [* PROTOCOL INFO] * EVENT [* SID] * RETURN CODE
+25-JAN-2011 08:58:37 * (CONNECT_DATA=(CID=(PROGRAM=)(HOST=)(USER=ibm))(COMMAND=status)(ARGUMENTS=64)(SERVICE=LISTENER)(VERSION=169869568)) * status * 0
+25-JAN-2011 09:23:33 * service_register * mg * 0
+
+# TNSLSNR for 32-bit Windows: Version 10.2.0.1.0 - Production on 10-FEB-2011 14:47:23
+
+# Copyright (c) 1991, 2005, Oracle.  All rights reserved.
+
+# System parameter file is D:\oracle\product\10.2.0\db_mg\network\admin\listener.ora
+# Log messages written to D:\oracle\product\10.2.0\db_mg\network\log\listener.log
+# Trace information written to D:\oracle\product\10.2.0\db_mg\network\trace\listener.trc
+# Trace level is currently 0
+
+Started with pid=2624
+Listening on: (DESCRIPTION=(ADDRESS=(PROTOCOL=ipc)(PIPENAME=\\.\pipe\EXTPROC1ipc)))
+Listening on: (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=marlgl)(PORT=1521)))
+
+# TNSLSNR for 32-bit Windows: Version 10.2.0.1.0 - Production on 10-FEB-2011 14:53:50
+
+Copyright (c) 1991, 2005, Oracle.  All rights reserved.
+
+System parameter file is D:\oracle\product\10.2.0\db_mg\network\admin\listener.ora
+Log messages written to D:\oracle\product\10.2.0\db_mg\network\log\listener.log
+Trace information written to D:\oracle\product\10.2.0\db_mg\network\trace\listener.trc
+Trace level is currently 0
+
+Started with pid=2964
+Listening on: (DESCRIPTION=(ADDRESS=(PROTOCOL=ipc)(PIPENAME=\\.\pipe\EXTPROC1ipc)))
+Listening on: (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=marlgl)(PORT=1521)))
+
+Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=IPC)(KEY=EXTPROC1)))
+32-bit Windows Error: 2: No such file or directory
+
+OracleOraDb10g_home1TNSListener
+
+本地计算机上 OracleOraDb10g_home1TNSListener 服务启动后又停止了。
+
+# cd ORACLE_HOEM/sqlplus/admin/help  
+# sqlplus system/pwd  
+# system@ORCL> @helpdrop.sql  
+# system@ORCL> @helpbld.sql  
+# system@ORCL> @helpus.sql  
+# first input: path name()  
+# second input: helpus.sql  
+#   
+cp /.../help.sql .
+system@ORCL> @help.sql
+
+# system@ORCL> help grant  
+
+
+
+
+
+#### PostgreSQL ---------------------------------------------
+#
+# If this is your first install, create a database with:
+# $ initdb /usr/local/var/postgres
+#
+# start manually with:
+    pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
+
+# And stop with:
+    pg_ctl -D /usr/local/var/postgres stop -s -m fast
+#
+#
+#
+#### MySql ---------------------------------------------------
+#
+To run as, for instance, user "mysql", you may need to `sudo`:
+    sudo mysql_install_db ...options...
+
+Start mysqld manually with:
+    mysqld_safe &
+
+To connect:
+    mysql -uroot
+
+To launch on startup:
+* if this is your first install:
+    mkdir -p ~/Library/LaunchAgents
+    cp /usr/local/Cellar/mysql/5.5.10/com.mysql.mysqld.plist ~/Library/LaunchAgents/
+    launchctl load -w ~/Library/LaunchAgents/com.mysql.mysqld.plist
+
+* if this is an upgrade and you already have the com.mysql.mysqld.plist loaded:
+    launchctl unload -w ~/Library/LaunchAgents/com.mysql.mysqld.plist
+    cp /usr/local/Cellar/mysql/5.5.10/com.mysql.mysqld.plist ~/Library/LaunchAgents/
+    launchctl load -w ~/Library/LaunchAgents/com.mysql.mysqld.plist
+
+You may also need to edit the plist to use the correct "UserName".
+
+To start mysqld at boot time you have to copy
+support-files/mysql.server to the right place for your system
+
+PLEASE REMEMBER TO SET A PASSWORD FOR THE MySQL root USER !
+To do so, start the server, then issue the following commands:
+
+./bin/mysqladmin -u root password 'new-password'
+./bin/mysqladmin -u root -h mobile password 'new-password'
+
+Alternatively you can run:
+./bin/mysql_secure_installation
+
+which will also give you the option of removing the test
+databases and anonymous user created by default.  This is
+strongly recommended for production servers.
+
+See the manual for more instructions.
+
+You can start the MySQL daemon with:
+cd . ; ./bin/mysqld_safe &
+
+You can test the MySQL daemon with mysql-test-run.pl
+cd ./mysql-test ; perl mysql-test-run.pl
+
+Please report any problems with the ./bin/mysqlbug script!
+
+launchctl unload -w ~/Library/LaunchAgents/com.mysql.mysqld.plist
+launchctl load -w ~/Library/LaunchAgents/com.mysql.mysqld.plist
+mysql -uroot
+mysql> show databases;
+mysql> use test;
+mysql> show tables;
+
+#
+$ sed 's/ \{1,\}/ /g' 101-20110717-20120717.txt > 2.sql
+#mysql> LOAD DATA INFILE '/Users/mg/Downloads/2.sql' 
+INTO TABLE lottery 
+FIELDS TERMINATED BY ' ' 
+LINES TERMINATED BY '\r\n';
+
+Query OK, 154 rows affected, 1078 warnings (0.01 sec)
+Records: 154  Deleted: 0  Skipped: 0  Warnings: 1078
+
+# mysql> LOAD DATA INFILE '/Users/mg/Downloads/2003-20120717.sql' INTO TABLE lottery FIELDS TERMINATED BY ' ' LINES TERMINATED BY '\r\n' IGNORE 3 LINES;
+Query OK, 1367 rows affected, 9569 warnings (0.06 sec)
+Records: 1367  Deleted: 0  Skipped: 0  Warnings: 9569
+
+#mysql> update lottery set l_r1 = substring(l_number, 1, 2), l_r2 = substring(l_number, 4, 2), l_r3 = substring(l_number, 7, 2), l_r4 = substring(l_number, 10, 2), l_r5 = substring(l_number, 13, 2), l_r6 = substring(l_number, 16, 2), l_b1 = substring(l_number, 19, 2);
+
+mysql> select l_r1, count(*) from lottery group by l_r1;
+mysql> select * from lottery where l_number like '%21,25,28%';
+
+#mysql> insert into lottery(l_id,l_number,l_date)
+    -> values (2011082, '07,16,17,20,25,26|04', '2011-07-17');
+mysql> select l_id,l_number,l_date from lottery;
+

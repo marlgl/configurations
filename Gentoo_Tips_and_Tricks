@@ -699,6 +699,24 @@ Toggle case "HellO" to "hELLo" with g~ then a movement.
 Uppercase "HellO" to "HELLO" with gU then a movement. 
 Lowercase "HellO" to "hello" with gu then a movement. 
 
+### vim :help
+Jump to a subject:  Position the cursor on a tag (e.g. |bars|) and hit CTRL-].
+   With the mouse:  ":set mouse=a" to enable the mouse (in xterm or GUI).
+                    Double-click the left mouse button on a tag, e.g. |bars|.
+        Jump back:  Type CTRL-T or CTRL-O (repeat to go further back).
+
+Get specific help:  It is possible to go directly to whatever you want help
+                    on, by giving an argument to the |:help| command.
+
+### Folding
+zc      折叠
+zC      对所在范围内所有嵌套的折叠点进行折叠 
+zo      展开折叠
+zO      对所在范围内所有嵌套的折叠点展开
+[z      到当前打开的折叠的开始处。
+]z      到当前打开的折叠的末尾处。
+zj      向下移动。到达下一个折叠的开始处。关闭的折叠也被计入。
+zk      向上移动到前一折叠的结束处。关闭的折叠也被计入。
 ### ---------------------------------- -mg- VI -------------------------------
 
 ### ---------------------------------- Emacs ----------------------------------------
@@ -1141,6 +1159,9 @@ $ git commit --amend -C HEAD
 Tagging
 $ git tag
 $ git tag -l 'v1.4.2.*'
+
+$ git ls-remote --tags origin
+
 Creating Tags
 Annotated Tags
 $ git tag -a v1.4 -m 'my version 1.4'
@@ -1155,6 +1176,9 @@ $ git tag -s v1.1.2 -m 'signed 1.1.2 tag'
 You need a passphrase to unlock the secret key for
 user: "marlgl (gpg signed) <marlgl.guo@gmail.com>"
 2048-bit RSA key, ID 428CB888, created 2011-09-01
+
+默认情况下,git push 并不会把标签传送到远端服务器上,只有通过显式命令才能分享标签到远端仓库。
+$ git push origin [tagname] 
 
 ### push remote branch
 $ git push origin mg // git push origin mg:mg
@@ -1198,6 +1222,22 @@ $ git remote add origin git@git.cssweb:sso/web_manager.git
 ;;; ########
 $ git remote prune --dry-run origin
 
+### git clean
+# romove untracked files from the working tree
+# -n, --dry-run
+#   Don't actually remove anything, just show what would be done.
+$ git clean -d -n
+Would remove trade/.settings/com.adobe.flexbuilder.project.prefs
+Would remove trade/html-template/history/
+$ git clean -d -f
+Removing trade/.settings/com.adobe.flexbuilder.project.prefs
+Removing trade/html-template/history/
+
+
+$ git format-patch <patch>
+$ git format-patch -o ../ HEAD~..HEAD
+$ git am *.patch
+
 ### ------------------------------------ CVS Git ----------------------------------
 #$ CVSROOT=:pserver:marlgl:guolei@localhost:/root;export CVSROOT
 #$ cvs login
@@ -1214,6 +1254,23 @@ Logging in to :pserver:guolei@cvs.cssweb.sh.cn:2401/cvs_2010/product/webtrade
   560  git remote add marlgl git@172.16.2.30:~/trade/flash/CsTradeSywg.git
   562  git push marlgl master
 
+  git blame可以用来查看特定代码块的历史信息
+  $ git blame -L 412,415 Classes/BankTransferOut.m
+
+
+衍合　git rebase
+把一个分支整合到另一个分支的办法有两种:merge(合并) 和 rebase(衍合)。
+$ git checkout experiment
+$ git rebase master
+First, rewinding head to replay your work on top of it... 
+Applying: added staged command
+
+$ git status
+# On branch rebase_test
+$ git rebase origin/ssl
+First, rewinding head to replay your work on top of it...
+Applying: fixed bug #1384
+
 
 ### ------------------------------------ CVS Git ----------------------------------
 
@@ -1223,7 +1280,11 @@ Logging in to :pserver:guolei@cvs.cssweb.sh.cn:2401/cvs_2010/product/webtrade
 # --------------------------------------- Mac Learning Tips -------------------------------
 ###
 ; marlgl@qq.com
-; G01
+
+## Show User ~/Library in OS X Lion
+$ chflags nohidden ~/Library/
+## Hide User ~/Library in OS X Lion (default setting)
+$ chflags hidden ~/Library
 
 $ scutil --set HostName mobile
 
@@ -1310,11 +1371,18 @@ Use NSZombieEnabled
         when holding on alt and option keys.
 
 2. NSZombieEnabled YES
-3. MallocStackLogging YES
+3. MallocStackLogging YES /* 该选项只能在模拟器上有效 */
+
+### 设置信息都是可以在运行期确认
+NSLog(@"NSZombieEnabled: %s", getenv("NSZombieEnabled"));
 
 ### look alloc history
-gdb> shell malloc_history <ProcessID> <OBJECT ADDRESS>
+$ (gdb) info malloc_history 0x12e4b0 
+[xcode]gdb> shell malloc_history <ProcessID> <OBJECT ADDRESS>
 
+### 使用下面的命令，可以在终端输出有符号信息的CrashLog
+$ symbolicatecrash [CrashLog file] [dSYM file]
+$ symbolicatecrash TestEditor_2010-09-23-454678_iPhone1.crash TestEditor.app.dSYM
 
 
 ### Clang LLVM
@@ -1326,7 +1394,19 @@ Password:
 # Resetting Xcode to its default behavior:
 $ sudo set-xcode-analyzer --use-xcode-clang
 
-
+几个常用的Objective-C开源类库:
+json-framework A strict JSON parser/generator for Objective-C
+GTMBase64 Google Toolbox for Mac
+TouchXML xml解析
+SFHFKeychainUtils 安全保存用户密码到keychain中
+MBProgressHUD 很棒的一个加载等待特效框架
+ASIHTTPRequest http等相关协议封装
+EGORefreshTableHeaderView 下拉刷新代码
+AsyncImageView 异步加载图片并缓存代码
+类似Setting的竖立也分栏程序
+FMDB  Sqlite的Objective-C封装类
+gh-unit iPhone单元测试框架，据说比系统自带和google都好用。AsiHttpRequest 就是采用的这个单元测试工具。
+StatusBar 显示提示信息
 
 ###
 # ------------------------ MyEclipse 9 ----------------------------------------------------------------
