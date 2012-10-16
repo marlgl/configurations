@@ -1403,6 +1403,29 @@ system@ORCL> @help.sql
 #
 #### MySql ---------------------------------------------------
 #
+
+
+MySQL: Reset Lost Root Password
+Step 1: Stop MySQL daemon if it is currently running
+    $ ps -ef | grep mysql      - checks if mysql/mysqld is one of the running processes.
+
+Step 2: Run MySQL safe daemon with skipping grant tables
+
+    $ mysqld_safe --skip-grant-tables &
+
+Step 3: Login to MySQL as root with no password
+
+    $ mysql -u root mysql
+
+Step 4: Run UPDATE query to reset the root password
+
+    In MySQL command line prompt issue the following two commands:
+
+    mysql> UPDATE user SET password=PASSWORD("ualue=42") WHERE user="root";
+    mysql> FLUSH PRIVILEGES;
+
+
+
 To run as, for instance, user "mysql", you may need to `sudo`:
     sudo mysql_install_db ...options...
 

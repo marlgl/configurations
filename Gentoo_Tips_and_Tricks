@@ -1130,10 +1130,11 @@ and let my text editors deal with line endings.
 (If you like having core.autocrlf set to true or input, I’d love to hear why.)
 
 $ git config core.whitespace cr-at-eol
+$ git diff --cached --ignore-all-space
 
 Adding the remote repository to our local git repository configuration
-$ git remote add origin ssh://myserver.com/var/git/myapp.git
-$ git diff --cached --ignore-all-space
+$ git remote add origin git@mobile:super_trade.git
+
 
 $ git reset --soft HEAD~
 Before: HEAD    Index   Working
@@ -1439,7 +1440,7 @@ $ svn import Learning svn://mobile/Learning/branches -m "branche 1.0"
 ### ---------- create User and group ---------------------------------------
 macbook:~ gorby$ dscl . -list /groups gid | grep 4200
 macbook:~ gorby$ dscl . -list /users uid | grep 4200
-udo dscl . -create /groups/dba
+sudo dscl . -create /groups/dba
 sudo dscl . -append /groups/dba gid 4200
 sudo dscl . -append /groups/dba passwd "*"
 sudo dscl . -create /users/oracle
@@ -1510,4 +1511,7 @@ $ port list
 ###
 # --------------------------------------- Mac Learning Tips -------------------------------
 ###
+
+## myeclipse - struts
+<nature>com.genuitec.eclipse.cross.easystruts.eclipse.easystrutsnature</nature>
 
