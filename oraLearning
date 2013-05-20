@@ -1504,3 +1504,6 @@ mysql> select * from lottery where l_number like '%21,25,28%';
     -> values (2011082, '07,16,17,20,25,26|04', '2011-07-17');
 mysql> select l_id,l_number,l_date from lottery;
 
+select to_char(to_date('01-01-1970','DD-MM-YYYY HH24:MI SS') + 
+    ( 1368986423240 / (1000*60 * 60 * 24) ) ,'YYYY-MM-DD HH24:MI:SS') from dual;
+

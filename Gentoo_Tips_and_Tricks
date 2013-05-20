@@ -1132,6 +1132,7 @@ and let my text editors deal with line endings.
 $ git config core.whitespace cr-at-eol
 $ git diff --cached --ignore-all-space
 
+### ------------------------------ ***** ---------------------------------------
 Adding the remote repository to our local git repository configuration
 $ git remote add origin git@mobile:super_trade.git
 
