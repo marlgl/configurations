@@ -1236,6 +1236,11 @@ Removing trade/.settings/com.adobe.flexbuilder.project.prefs
 Removing trade/html-template/history/
 
 
+$ git push origin :notmaster
+error: dst refspec notmaster matches more than one.
+### $ git push origin :refs/heads/notmaster
+
+
 $ git format-patch <patch>
 $ git format-patch -o ../ HEAD~..HEAD
 $ git am *.patch
@@ -1516,3 +1521,6 @@ $ port list
 ## myeclipse - struts
 <nature>com.genuitec.eclipse.cross.easystruts.eclipse.easystrutsnature</nature>
 
+ldd /usr/local/bin/vim
+
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
